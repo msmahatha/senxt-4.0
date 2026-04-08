@@ -1,0 +1,26 @@
+<svg width="640" height="760" viewBox="0 0 640 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="640" y2="760" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#06111A" />
+      <stop offset="1" stop-color="#132D39" />
+    </linearGradient>
+    <radialGradient id="glow3" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(350 210) rotate(90) scale(260)">
+      <stop stop-color="#21D5BF" stop-opacity="0.32" />
+      <stop offset="1" stop-color="#21D5BF" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="plate3" x1="120" y1="620" x2="520" y2="720" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D5A64A" stop-opacity="0.95" />
+      <stop offset="1" stop-color="#E8C978" stop-opacity="0.95" />
+    </linearGradient>
+  </defs>
+
+  <rect width="640" height="760" rx="48" fill="url(#bg3)" />
+  <rect width="640" height="760" rx="48" fill="url(#glow3)" />
+
+  <ellipse cx="320" cy="300" rx="88" ry="104" fill="#DEB992" />
+  <path d="M210 286C210 220 262 168 320 168C378 168 430 220 430 286V312H210V286Z" fill="#0E2430" />
+  <path d="M184 522C184 444 244 386 320 386C396 386 456 444 456 522V620H184V522Z" fill="#1C3E4C" />
+  <rect x="140" y="618" width="360" height="108" rx="28" fill="url(#plate3)" />
+
+  <text x="320" y="685" text-anchor="middle" fill="#0B1D23" font-family="Arial, sans-serif" font-size="62" font-weight="700" letter-spacing="3">SL</text>
+</svg>

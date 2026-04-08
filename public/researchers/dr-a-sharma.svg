@@ -1,0 +1,26 @@
+<svg width="640" height="760" viewBox="0 0 640 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg1" x1="0" y1="0" x2="640" y2="760" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#031922" />
+      <stop offset="1" stop-color="#0B2E37" />
+    </linearGradient>
+    <radialGradient id="glow1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(320 240) rotate(90) scale(260)">
+      <stop stop-color="#21D5BF" stop-opacity="0.35" />
+      <stop offset="1" stop-color="#21D5BF" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="plate1" x1="120" y1="620" x2="520" y2="720" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D5A64A" stop-opacity="0.95" />
+      <stop offset="1" stop-color="#E8C978" stop-opacity="0.95" />
+    </linearGradient>
+  </defs>
+
+  <rect width="640" height="760" rx="48" fill="url(#bg1)" />
+  <rect width="640" height="760" rx="48" fill="url(#glow1)" />
+
+  <ellipse cx="320" cy="296" rx="92" ry="108" fill="#D8B48C" />
+  <path d="M220 278C220 220 265 178 320 178C375 178 420 220 420 278V302H220V278Z" fill="#102A33" />
+  <path d="M190 520C190 440 248 380 320 380C392 380 450 440 450 520V620H190V520Z" fill="#173845" />
+  <rect x="140" y="618" width="360" height="108" rx="28" fill="url(#plate1)" />
+
+  <text x="320" y="685" text-anchor="middle" fill="#091A1F" font-family="Arial, sans-serif" font-size="62" font-weight="700" letter-spacing="3">AS</text>
+</svg>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { FooterGlobe } from "./FooterGlobe";
 
 export function Footer() {
   return (
@@ -13,6 +14,8 @@ export function Footer() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
+        <FooterGlobe />
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 items-start mb-24">
           
           {/* Left: Logo */}

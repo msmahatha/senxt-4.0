@@ -46,7 +46,7 @@ function ParticleCloud() {
     <Points ref={ref} positions={sphere} stride={3} frustumCulled={false}>
       <PointMaterial
         transparent
-        color="#00f0ff"
+        color="#21d5bf"
         size={0.03}
         sizeAttenuation={true}
         depthWrite={false}
