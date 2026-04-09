@@ -4,7 +4,7 @@ import { AboutSection } from "@/components/sections/AboutSection";
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Learn about Sense-XT Innovations — a deep-tech startup from Jalpaiguri and Kolkata committed to delivering indigenous, Make in India healthcare diagnostics.",
+    "Sense-XT Innovations Private Limited is a DPIIT approved deep-tech startup building at the intersection of quantum technology, nanotechnology, and artificial intelligence.",
 };
 
 export default function AboutPage() {
@@ -12,10 +12,10 @@ export default function AboutPage() {
     <div className="pt-24 min-h-screen">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 pt-12 pb-8">
         <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white mb-6">
-          Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Mission</span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Who We Are</span>
         </h1>
         <p className="text-xl text-neutral-400 font-light max-w-3xl leading-relaxed">
-          Sense-XT Innovations Private Limited is a deep-tech startup born out of Jalpaiguri and Kolkata, fiercely committed to delivering indigenous, &quot;Make in India&quot; healthcare solutions with an unbreakable foundation in scientific rigor.
+          Sense-XT Innovations Private Limited is a DPIIT approved deep-tech startup building next-generation solutions at the intersection of Quantum Technology, Nanotechnology, and Artificial Intelligence. Our work focuses on translating advanced scientific research into real-world sensing and diagnostic technologies, aligned with India&apos;s vision under the National Quantum Mission.
         </p>
       </div>
       

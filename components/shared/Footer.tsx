@@ -5,18 +5,10 @@ import { FooterGlobe } from "./FooterGlobe";
 export function Footer() {
   return (
     <footer className="relative w-full bg-[#050505] pt-24 pb-8 overflow-hidden border-t border-white/5 mt-auto">
-      
-      {/* Massive Background Text */}
-      <div className="absolute bottom-[-10%] left-0 w-full flex justify-center pointer-events-none select-none overflow-hidden z-0">
-        <h1 className="text-[18vw] font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white/[0.08] to-transparent">
-          SENSE-XT
-        </h1>
-      </div>
-
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <FooterGlobe />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 items-start mb-24">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 items-start">
           
           {/* Left: Logo */}
           <div className="flex flex-col items-center md:items-start text-center md:text-left">
@@ -61,12 +53,18 @@ export function Footer() {
                 © 2026 Sense-XT Innovations. All rights reserved.
               </p>
               <p className="text-xs text-neutral-500 font-medium tracking-wide text-center md:text-right">
-                Made with <span className="text-red-500/80 animate-pulse inline-block">♥</span> by Digontom Pvt. Ltd.
+                Made by Digontom Pvt. Ltd.
               </p>
             </div>
           </div>
 
         </div>
+      </div>
+
+      <div className="mt-14 w-full pointer-events-none select-none overflow-hidden">
+        <h1 className="w-full whitespace-nowrap text-center text-[22vw] leading-none font-black tracking-[-0.05em] text-transparent bg-clip-text bg-gradient-to-b from-white/[0.08] to-transparent">
+          SENSE-XT
+        </h1>
       </div>
     </footer>
   );

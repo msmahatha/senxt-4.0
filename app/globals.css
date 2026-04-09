@@ -55,12 +55,14 @@ body {
   scrollbar-width: none;  /* Firefox */
 }
 
-/* Soft Glow Utility */
+/* Text glow utility without box highlights */
 .glow-cyan {
-  box-shadow: 0 0 15px rgba(33, 213, 191, 0.42);
+  box-shadow: none;
+  text-shadow: 0 0 10px rgba(33, 213, 191, 0.45);
 }
 .glow-purple {
-  box-shadow: 0 0 15px rgba(197, 146, 62, 0.4);
+  box-shadow: none;
+  text-shadow: 0 0 10px rgba(197, 146, 62, 0.42);
 }
 
 ::selection {

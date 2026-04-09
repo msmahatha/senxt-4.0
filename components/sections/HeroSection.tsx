@@ -338,42 +338,17 @@ export function HeroSection() {
         </div>
 
         <h1 className="mb-6 text-[42px] font-bold leading-[1.05] tracking-[-0.03em] text-white md:text-[68px]">
-          Mapping How Genes
+         Precision Diagnostics
           <br />
-          Causally Shape Biology
+          at the Quantum Scale
           <span className="text-[#d5a64a] drop-shadow-[0_0_12px_rgba(213,166,74,0.75)]">.</span>
         </h1>
 
         <p className="mx-auto mb-14 max-w-[620px] text-[15px] leading-relaxed font-normal text-gray-300 md:text-[17px]">
-          By testing every gene across all human tissues using large-scale Mendelian randomization and
-          colocalization across thousands of diseases.
+          Advancing next-generation sensor fabrication and AI for ultra-early disease detection.
         </p>
 
-        <div className="pointer-events-auto mx-auto mb-16 grid max-w-[600px] grid-cols-1 gap-x-12 gap-y-10 rounded-3xl border border-white/10 bg-white/5 p-8 shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-lg md:grid-cols-2">
-          <div className="flex flex-col items-center">
-            <div className="mb-1 flex items-baseline gap-1">
-              <span className="text-[44px] font-medium tracking-tight text-white drop-shadow-md">1.8</span>
-              <span className="text-[20px] font-semibold text-[#d5a64a]">x</span>
-            </div>
-            <span className="text-[13px] font-medium text-gray-400">Originally developed</span>
-          </div>
-
-          <div className="flex flex-col items-center">
-            <div className="mb-1 flex items-baseline gap-1">
-              <span className="text-[44px] font-medium tracking-tight text-white drop-shadow-md">88.2</span>
-              <span className="text-[20px] font-semibold text-[#d5a64a]">%</span>
-            </div>
-            <span className="text-[13px] font-medium text-gray-400">Leverage observational data</span>
-          </div>
-
-          <div className="flex flex-col items-center md:col-span-2">
-            <div className="mb-1 flex items-baseline gap-1">
-              <span className="text-[44px] font-medium tracking-tight text-white drop-shadow-md">9.2</span>
-              <span className="text-[20px] font-semibold text-[#d5a64a]">M</span>
-            </div>
-            <span className="text-[13px] font-medium text-gray-400">Causal inference techniques</span>
-          </div>
-        </div>
+        
       </div>
 
       {/* Soft seam into the zoom sequence below */}
