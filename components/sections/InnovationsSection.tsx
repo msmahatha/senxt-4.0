@@ -3,9 +3,9 @@
 import { motion } from "framer-motion";
 
 const innovations = [
-  { id: 1, title: "Dengue Detection Platform", subtitle: "Rapid Electrochemical Sensor", image: "https://images.unsplash.com/photo-1532187643603-ba119ca4109e?q=80&w=800&auto=format&fit=crop" },
-  { id: 2, title: "Quantum Biosensing Prototype", subtitle: "Fluorescence Nanodiamonds", image: "https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?q=80&w=800&auto=format&fit=crop" },
-  { id: 3, title: "Data-Driven AI Diagnostics", subtitle: "Next-Gen Hardware", image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800&auto=format&fit=crop" },
+  { id: 1, title: "Dengue Detection Platform", subtitle: "Rapid Electrochemical Sensor", image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?q=80&w=800&auto=format&fit=crop" },
+  { id: 2, title: "Quantum Biosensing Prototype", subtitle: "Fluorescence Nanodiamonds", image: "https://images.unsplash.com/photo-1628863353691-0071c8c1874c?q=80&w=800&auto=format&fit=crop" },
+  { id: 3, title: "Data-Driven AI Diagnostics", subtitle: "Next-Gen Hardware", image: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?q=80&w=800&auto=format&fit=crop" },
 ];
 
 export function InnovationsSection() {

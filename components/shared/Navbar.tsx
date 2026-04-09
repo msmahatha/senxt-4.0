@@ -82,7 +82,7 @@ export function Navbar() {
                 className="flex items-center gap-2 hover:text-cyan-400 transition-colors cursor-none"
                 aria-haspopup="menu"
               >
-                Insight
+                <span className="uppercase font-bold tracking-widest">INSIGHT</span>
                 <span className="text-[10px] text-cyan-400 transition-transform duration-300 group-hover:rotate-180">▼</span>
               </button>
 
@@ -132,7 +132,7 @@ export function Navbar() {
               onClick={() => setIsMobileInsightOpen((prev) => !prev)}
               className="flex w-full items-center justify-between text-sm font-semibold uppercase tracking-widest text-white/80 hover:text-cyan-300 transition-colors"
             >
-              Insight
+              <span className="uppercase font-bold tracking-widest">INSIGHT</span>
               <span className={`text-xs text-cyan-400 transition-transform duration-300 ${isMobileInsightOpen ? "rotate-180" : ""}`}>▼</span>
             </button>
 
