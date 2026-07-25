@@ -4,9 +4,9 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 
-export function ApplicationsSection() {
+export function ApplicationsSection({ className }: { className?: string }) {
   return (
-    <section id="applications" className="relative py-24 w-full bg-[#050505] border-t border-white/5">
+    <section id="applications" className={`relative w-full bg-[#050505] ${className ?? "py-24 border-t border-white/5"}`}>
       <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full z-10">
         
         <motion.div

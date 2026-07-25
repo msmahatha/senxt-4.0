@@ -34,41 +34,65 @@ const MISSION_POINTS = [
 ];
 
 const LEADERSHIP = [
-  { name: "Manas Thakur", role: "Co-founder & CEO" },
-  { name: "Sk Najes Riaz", role: "Co-founder & CTO" },
-  { name: "Sourav Sarkar", role: "Co-founder & Mentor" },
+  { 
+    name: "Manas Thakur", 
+    role: "Co-Founder & CEO, Director", 
+    company: "Sense-XT Innovations Pvt. Ltd.",
+    image: "/manas-thakur.jpg",
+    education: [
+      "Ph.D. Scholar | Jadavpur University",
+      "M.Tech, Gold Medalist",
+      "Visiting Scholar | University of Waterloo"
+    ],
+    researchInterests: "Electrochemical Biosensors • Microfluidics • Quantum Material • 2D Materials • Quantum Sensing • Nanotechnology • Microelectronics & Simulation"
+  },
+  { 
+    name: "Sk. Najes Riaz", 
+    role: "Co-Founder & CTO, Director",
+    company: "Sense-XT Innovations Pvt. Ltd.",
+    image: "/sk-najes-riaz.jpg",
+    education: [
+      "Ph.D. Scholar | Jadavpur University"
+    ],
+    researchInterests: "Quantum Materials • 2D Materials • Quantum Circuit • Quantum Sensing • Nanotechnology • Signal processing • Optical Engineering"
+  },
+  { 
+    name: "Prof. Sourav Sarkar", 
+    role: "Co-founder & Mentor",
+    company: "Sense-XT Innovations Pvt. Ltd.",
+    image: "/prof-sourav-sarkar.jpg",
+    education: [
+      "Director & Professor at School of Materials Science & Nanotechnology, Jadavpur University"
+    ],
+    researchInterests: "Electrochemical Biosensors • Quantum Materials • 2D Materials • Quantum Sensing • Nanotechnology"
+  },
+  {
+    name: "Sarwar Akhtar",
+    role: "Research Engineer",
+    company: "Sense-XT Innovations Pvt. Ltd.",
+    image: "/sarwar-akhtar.jpg",
+    education: [
+      "M.tech at School of Materials Science & Nanotechnology, Jadavpur University"
+    ],
+    researchInterests: "Electrochemical Biosensors • 2D Materials • Nanotechnology"
+  },
+  {
+    name: "Arnab Kumar Saha",
+    role: "Research Engineer",
+    company: "Sense-XT Innovations Pvt. Ltd.",
+    image: "/arnab-kumar-saha.jpg",
+    education: [
+      "M.tech at School of Materials Science & Nanotechnology, Jadavpur University"
+    ],
+    researchInterests: "Electrochemical Biosensors • 2D Materials • Optical Sensor • Nanotechnology"
+  }
 ];
 
 const INSTITUTES = [
   {
-    id: "iic-jadavpur-university",
-    name: "IIC Jadavpur University",
-    logo: "/institutes/iic-jadavpur-university-updated.jpeg",
-  },
-  {
-    id: "jadavpur-university",
-    name: "Jadavpur University",
-    logo: "/institutes/jadavpur-university-updated.png",
-  },
-  {
-    id: "qmet-iit-bombay",
-    name: "QMET IIT Bombay",
-    logo: "/institutes/qmet-iit-bombay-updated.png",
-  },
-  {
-    id: "national-quantum-mission",
-    name: "National Quantum Mission (NQM)",
-    logo: "/institutes/national-quantum-mission-updated.png",
-  },
-  {
-    id: "iim-calcutta-innovation-park",
-    name: "IIM Calcutta Innovation Park",
-    logo: "/institutes/iim-calcutta-innovation-park-updated.png",
-  },
-  {
-    id: "make-in-india",
-    name: "Make in India",
-    logo: "/institutes/make-in-india-updated.jpg",
+    id: "blackspektro",
+    name: "Blackspektro Solutions Pvt Ltd",
+    logo: "/institutes/blackspektro.png",
   },
 ];
 
@@ -99,7 +123,7 @@ export function AboutSection() {
           </p>
 
           <div className="mt-6 rounded-[1.5rem] border border-[#21d5bf]/20 bg-gradient-to-br from-[#21d5bf]/6 via-white/[0.02] to-[#d5a64a]/10 p-5 md:p-6">
-            <p className="text-sm md:text-base font-bold uppercase tracking-[0.22em] text-[#d5a64a]">Institutional Ecosystem</p>
+            <p className="text-sm md:text-base font-bold uppercase tracking-[0.22em] text-[#d5a64a]">Collaboration</p>
             <div className="relative mt-4 overflow-hidden rounded-2xl border border-white/10 bg-[#050505]/70">
               <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 md:w-28 bg-gradient-to-r from-[#050505] to-transparent" />
               <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 md:w-28 bg-gradient-to-l from-[#050505] to-transparent" />
@@ -115,7 +139,6 @@ export function AboutSection() {
                         src={institute.logo}
                         alt={`${institute.name} logo`}
                         fill
-                        unoptimized
                         sizes="80px"
                         className="object-contain p-1.5"
                       />
@@ -127,26 +150,7 @@ export function AboutSection() {
             </div>
           </div>
 
-          <div className="mt-6 hidden lg:grid lg:flex-1 grid-cols-2 gap-4 auto-rows-fr">
-            {INSTITUTES.map((institute) => (
-              <article
-                key={`grid-${institute.id}`}
-                className="h-full rounded-2xl border border-white/10 bg-white/[0.02] p-4 flex items-center gap-4"
-              >
-                <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-lg border border-white/10 bg-white">
-                  <Image
-                    src={institute.logo}
-                    alt={`${institute.name} logo`}
-                    fill
-                    unoptimized
-                    sizes="64px"
-                    className="object-contain p-1.5"
-                  />
-                </div>
-                <p className="text-base font-medium text-neutral-100 leading-tight">{institute.name}</p>
-              </article>
-            ))}
-          </div>
+
         </motion.div>
 
           <div className="lg:w-1/2 flex flex-col gap-6 w-full">
@@ -168,30 +172,49 @@ export function AboutSection() {
               </div>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="relative p-8 border border-[#1dd3b0]/20 bg-gradient-to-br from-[#1dd3b0]/5 to-transparent rounded-3xl overflow-hidden hover:border-[#1dd3b0]/50 transition-colors"
-            >
-              <h3 className="text-xl font-semibold text-white mb-3">Vision</h3>
-              <p className="text-neutral-300 font-light leading-relaxed text-sm mb-6">
-                To position India as a global leader in quantum-enabled sensing and nanotechnology innovation.
-              </p>
 
-              <h3 className="text-xl font-semibold text-white mb-3">Mission</h3>
-              <ul className="space-y-3">
-                {MISSION_POINTS.map((point) => (
-                  <li key={point} className="flex items-start gap-3 text-sm text-neutral-300 font-light leading-relaxed">
-                    <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#1dd3b0]" />
-                    <span>{point}</span>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
           </div>
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="w-full relative p-8 md:p-12 border border-[#1dd3b0]/20 bg-gradient-to-br from-[#1dd3b0]/5 to-transparent rounded-3xl overflow-hidden"
+        >
+          {/* Ambient Glow */}
+          <div className="absolute -top-24 -right-24 w-96 h-96 bg-[#1dd3b0]/10 rounded-full blur-[100px] pointer-events-none" />
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 relative z-10">
+            {/* Vision Card */}
+            <div className="group flex flex-col justify-start rounded-2xl border border-white/5 bg-[#050505]/60 p-8 hover:bg-[#050505]/80 hover:border-[#1dd3b0]/30 transition-all duration-500">
+              <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-[#1dd3b0]/10 text-[#1dd3b0] ring-1 ring-inset ring-[#1dd3b0]/20 group-hover:scale-110 transition-transform duration-500">
+                <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-semibold text-white mb-4 tracking-wide group-hover:text-[#1dd3b0] transition-colors">Our Vision</h3>
+              <p className="text-neutral-400 font-light leading-relaxed text-base group-hover:text-neutral-300 transition-colors">
+                To pioneer quantum-powered healthcare by developing globally competitive quantum sensing, nanotechnology, and AI-driven solutions from India that enable early disease detection, advance the National Quantum Mission, and strengthen India's leadership in deep-tech innovation under the vision of Make in India, Atmanirbhar Bharat, and Viksit Bharat.
+              </p>
+            </div>
+
+            {/* Mission Card */}
+            <div className="group flex flex-col justify-start rounded-2xl border border-white/5 bg-[#050505]/60 p-8 hover:bg-[#050505]/80 hover:border-[#d5a64a]/30 transition-all duration-500">
+              <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-[#d5a64a]/10 text-[#d5a64a] ring-1 ring-inset ring-[#d5a64a]/20 group-hover:scale-110 transition-transform duration-500">
+                <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-semibold text-white mb-4 tracking-wide group-hover:text-[#d5a64a] transition-colors">Our Mission</h3>
+              <p className="text-neutral-400 font-light leading-relaxed text-base group-hover:text-neutral-300 transition-colors">
+                We translate cutting-edge quantum, nanotechnology, and AI research into reliable, rapid, and accessible diagnostic solutions that advance technology driven preventive healthcare for all.
+              </p>
+            </div>
+          </div>
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -210,7 +233,7 @@ export function AboutSection() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="flex overflow-x-auto snap-x snap-mandatory pb-6 -mx-8 px-8 lg:pb-0 lg:mx-0 lg:px-0 lg:grid lg:grid-cols-3 gap-6 hide-scrollbar">
             {LEADERSHIP.map((leader, index) => (
               <motion.article
                 key={leader.name}
@@ -218,13 +241,41 @@ export function AboutSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.45, delay: index * 0.1 }}
-                className="rounded-2xl border border-white/10 bg-[#050505]/60 p-6 hover:border-[#21d5bf]/45 transition-colors"
+                className="snap-center shrink-0 w-[80vw] sm:w-[350px] lg:w-auto rounded-2xl border border-white/10 bg-[#050505]/60 p-6 hover:border-[#21d5bf]/45 transition-colors flex flex-col h-full"
               >
-                <div className="inline-flex items-center justify-center h-11 w-11 rounded-full border border-[#d5a64a]/40 bg-[#d5a64a]/10 text-[#d5a64a] text-sm font-semibold">
-                  {index + 1}
-                </div>
-                <h4 className="mt-4 text-xl font-semibold text-white">{leader.name}</h4>
-                <p className="mt-2 text-sm text-[#d5a64a]">{leader.role}</p>
+                {leader.image ? (
+                  <div className="relative w-full aspect-[4/5] mb-5 overflow-hidden rounded-xl border border-white/10">
+                    <Image src={leader.image} alt={leader.name} fill sizes="(max-width: 768px) 80vw, (max-width: 1200px) 50vw, 33vw" className="object-cover" />
+                  </div>
+                ) : (
+                  <div className="inline-flex items-center justify-center h-11 w-11 rounded-full border border-[#d5a64a]/40 bg-[#d5a64a]/10 text-[#d5a64a] text-sm font-semibold mb-4">
+                    {index + 1}
+                  </div>
+                )}
+                <h4 className="text-xl font-semibold text-white">{leader.name}</h4>
+                <p className="mt-1 text-sm font-medium text-[#d5a64a]">{leader.role}</p>
+                
+                {leader.company && (
+                  <p className="mt-1 text-xs text-neutral-400">{leader.company}</p>
+                )}
+                
+                {leader.education && (
+                  <div className="mt-4 space-y-1.5">
+                    {leader.education.map((edu, idx) => (
+                      <p key={idx} className="text-xs text-neutral-300 font-light flex items-start gap-2">
+                        <span className="mt-1 h-1 w-1 rounded-full bg-white/40 shrink-0" />
+                        <span>{edu}</span>
+                      </p>
+                    ))}
+                  </div>
+                )}
+
+                {leader.researchInterests && (
+                  <div className="mt-5 pt-4 border-t border-white/10 mt-auto">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#1dd3b0] mb-2">Research Interests</p>
+                    <p className="text-xs text-neutral-400 font-light leading-relaxed">{leader.researchInterests}</p>
+                  </div>
+                )}
               </motion.article>
             ))}
           </div>
@@ -239,6 +290,13 @@ export function AboutSection() {
       </div>
 
       <style jsx>{`
+        .hide-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+        .hide-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
         @keyframes instituteMarquee {
           from {
             transform: translateX(0);

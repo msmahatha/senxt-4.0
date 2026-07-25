@@ -1,18 +1,16 @@
 import Link from "next/link";
 import Image from "next/image";
-import { FooterGlobe } from "./FooterGlobe";
 
 export function Footer() {
   return (
     <footer className="relative w-full bg-[#050505] pt-24 pb-8 overflow-hidden border-t border-white/5 mt-auto">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <FooterGlobe />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 items-start">
           
-          {/* Left: Logo */}
+          {/* Left: Logo & Address */}
           <div className="flex flex-col items-center md:items-start text-center md:text-left">
-            <Link href="/" className="flex items-center gap-2 group cursor-none inline-block">
+            <Link href="/" className="flex items-center gap-2 group cursor-none inline-block mb-6">
               <div className="relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
                 <Image
                   src="/logo.png"
@@ -23,13 +21,18 @@ export function Footer() {
                 />
               </div>
             </Link>
+            
+            <div className="text-sm text-neutral-400 font-light space-y-2 mt-2">
+              <p><strong className="text-white font-medium">HQ:</strong> Ashram Para, Jalpaiguri – 735101</p>
+              <p><strong className="text-white font-medium">Operations:</strong> Jadavpur University, Kolkata - 700032</p>
+            </div>
           </div>
 
           {/* Center: Legal Links */}
           <div className="flex flex-col items-center gap-4 text-sm text-neutral-400 font-medium">
-            <Link href="#terms" className="hover:text-cyan-400 transition-colors cursor-none">Terms & Conditions</Link>
-            <Link href="#privacy" className="hover:text-cyan-400 transition-colors cursor-none">Privacy Policy</Link>
-            <Link href="#refund" className="hover:text-cyan-400 transition-colors cursor-none">Refund & Cancellation</Link>
+            <Link href="/terms-and-conditions" className="hover:text-cyan-400 transition-colors cursor-none">Terms & Conditions</Link>
+            <Link href="/privacy-policy" className="hover:text-cyan-400 transition-colors cursor-none">Privacy Policy</Link>
+            <Link href="/refund-and-cancellation" className="hover:text-cyan-400 transition-colors cursor-none">Refund & Cancellation</Link>
           </div>
 
           {/* Right: Socials & Copyright */}

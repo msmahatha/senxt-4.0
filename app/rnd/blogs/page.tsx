@@ -7,32 +7,7 @@ import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const BLOGS = [
-  {
-    title: "The Future of Deep-Tech Diagnostics in Developing Nations",
-    category: "Opinion",
-    date: "October 14, 2025",
-    excerpt: "How democratized access to ultra-early disease detection can fundamentally reshape global healthcare economics and save millions of lives.",
-    readTime: "5 min read",
-    gradient: "from-cyan-500/20 to-blue-500/5"
-  },
-  {
-    title: "Behind the Scenes: Prototyping our First Graphene Biosensor",
-    category: "Engineering",
-    date: "September 02, 2025",
-    excerpt: "An inside look into the R&D lab at Sense-XT. Overcoming the challenges of surface functionalization and signal-to-noise ratios in 2D materials.",
-    readTime: "8 min read",
-    gradient: "from-purple-500/20 to-pink-500/5"
-  },
-  {
-    title: "Understanding Limit of Detection (LoD) in Modern Pathology",
-    category: "Education",
-    date: "August 18, 2025",
-    excerpt: "A deep dive into why breaking the fM (femtomolar) barrier is critical for detecting asymptomatic infections before they spread.",
-    readTime: "6 min read",
-    gradient: "from-emerald-500/20 to-teal-500/5"
-  }
-];
+import { BLOGS } from "@/data/blogs";
 
 export default function BlogsPage() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -71,11 +46,16 @@ export default function BlogsPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {BLOGS.map((blog, index) => (
-            <Link href={`/blogs`} key={index} className="blog-card group cursor-none h-full flex flex-col">
+            <Link href={`/rnd/blogs/${blog.slug}`} key={index} className="blog-card group cursor-none h-full flex flex-col">
               <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden mb-6 bg-neutral-900">
-                {/* Fallback abstract gradient image instead of real photos for sleekness */}
+                {/* Fallback gradient */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${blog.gradient} opacity-80 group-hover:scale-110 transition-transform duration-700`} />
-                <div className="absolute inset-0 bg-[url('/noise.png')] opacity-20 mix-blend-overlay" />
+                
+                {/* Actual image */}
+                <div 
+                  className="absolute inset-0 bg-contain bg-no-repeat bg-center group-hover:scale-110 transition-transform duration-700"
+                  style={{ backgroundImage: `url('/blogs/${blog.slug}.jpg')` }}
+                />
                 
                 <div className="absolute top-4 left-4">
                   <span className="bg-black/50 backdrop-blur-md border border-white/10 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">

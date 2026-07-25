@@ -18,13 +18,7 @@ const channels = [
     detail: "career@sense-xt.com",
     hint: "For role and hiring related queries",
     href: "mailto:career@sense-xt.com",
-  },
-  {
-    title: "Phone",
-    detail: "+91 90000 00000",
-    hint: "Mon - Fri, 9:30 AM to 6:30 PM IST",
-    href: "tel:+919000000000",
-  },
+  }
 ];
 
 export default function ContactPage() {
