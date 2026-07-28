@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Atom, Layers, Zap } from "lucide-react";
+import { Atom, Layers } from "lucide-react";
 
 const cards = [
   {
@@ -17,7 +17,8 @@ const cards = [
   {
     title: "AI & Hardware Integration",
     description: "Next-generation hardware platforms seamlessly integrated with Artificial Intelligence to deliver enhanced analytical precision and data-driven diagnostics.",
-    icon: Zap,
+    image: "/ai_hardware.png",
+    bgImage: "/Ai_hardware_bg.png",
   },
 ];
 
@@ -50,7 +51,18 @@ export function OverviewSection() {
             >
               <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/0 via-transparent to-purple-500/0 group-hover:from-cyan-500/10 group-hover:to-purple-500/10 transition-all duration-700" />
               
-              <card.icon className="w-10 h-10 text-cyan-400 mb-6 group-hover:text-cyan-300 transition-colors duration-300 drop-shadow-[0_0_8px_rgba(33,213,191,0.75)]" />
+              {card.bgImage && (
+                <div 
+                  className="absolute inset-0 z-0 opacity-15 mix-blend-screen group-hover:opacity-30 transition-opacity duration-700 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url('${card.bgImage}')` }}
+                />
+              )}
+              
+              {card.image ? (
+                <img src={card.image} alt={card.title} className="w-12 h-12 rounded-lg object-cover mb-6 drop-shadow-[0_0_8px_rgba(33,213,191,0.75)]" />
+              ) : card.icon ? (
+                <card.icon className="w-10 h-10 text-cyan-400 mb-6 group-hover:text-cyan-300 transition-colors duration-300 drop-shadow-[0_0_8px_rgba(33,213,191,0.75)]" />
+              ) : null}
               
               <h4 className="text-xl font-semibold text-white mb-3">{card.title}</h4>
               <p className="text-neutral-400 font-light leading-relaxed">{card.description}</p>

@@ -36,12 +36,18 @@ export function InnovationsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="rounded-3xl border border-white/10 bg-[#0d1117] p-8 md:p-10 flex flex-col justify-between"
+            className="relative rounded-3xl border border-white/10 bg-[#0d1117] p-8 md:p-10 flex flex-col justify-between overflow-hidden group"
           >
-            <div>
+            {/* Background Image Overlay */}
+            <div 
+              className="absolute inset-0 z-0 opacity-15 mix-blend-screen group-hover:opacity-30 transition-opacity duration-700 bg-cover bg-center bg-no-repeat"
+              style={{ backgroundImage: `url('/bg_qb.png')` }}
+            />
+
+            <div className="relative z-10">
               <div className="flex items-start justify-between mb-8">
-                <div className="w-12 h-12 rounded-full border border-teal-500/30 flex items-center justify-center bg-teal-500/5">
-                  <div className="w-6 h-6 rounded-full border border-teal-500/50" />
+                <div className="w-12 h-12 rounded-full border border-teal-500/30 flex items-center justify-center bg-teal-500/5 overflow-hidden">
+                  <img src="/quentam.png" alt="Quantum Biosensor" className="w-10 h-10 object-contain" />
                 </div>
                 <span className="px-3 py-1 rounded-full text-[10px] font-bold tracking-wider text-teal-400 bg-teal-400/10 uppercase">
                   AVAILABLE
@@ -72,7 +78,7 @@ export function InnovationsSection() {
               </div>
             </div>
 
-            <div className="mt-10 rounded-xl bg-white/[0.03] border border-white/[0.05] p-5">
+            <div className="mt-10 rounded-xl bg-black/40 border border-white/10 p-5 relative z-10 backdrop-blur-md">
               <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-neutral-500 mb-2">APPLICATION</p>
               <p className="text-sm text-white font-medium">Hospital diagnostics, Point-of-care testing</p>
             </div>
@@ -89,20 +95,13 @@ export function InnovationsSection() {
             {/* Background Image Overlay */}
             <div 
               className="absolute inset-0 z-0 opacity-15 mix-blend-screen group-hover:opacity-30 transition-opacity duration-700 bg-cover bg-center bg-no-repeat"
-              style={{ backgroundImage: `url('/innovations/electrochemical-bg.jpg')` }}
+              style={{ backgroundImage: `url('/eletronic.png')` }}
             />
             
             <div className="relative z-10">
               <div className="flex items-start justify-between mb-8">
                 <div className="w-12 h-12 rounded-full border border-teal-500/30 flex items-center justify-center bg-[#E5F5F6] overflow-hidden">
-                  <svg viewBox="0 0 100 100" className="w-8 h-8">
-                    {/* Flask Outline */}
-                    <path d="M35 25 H65 M40 25 V45 L20 80 H80 L60 45 V35" fill="none" stroke="#003D33" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round" />
-                    {/* Top Lip */}
-                    <rect x="33" y="21" width="34" height="8" rx="4" fill="none" stroke="#003D33" strokeWidth="8" />
-                    {/* Lightning Bolt */}
-                    <path d="M55 40 L42 60 H52 L48 75 L62 55 H52 Z" fill="#90C9C9" stroke="#003D33" strokeWidth="6" strokeLinejoin="round" />
-                  </svg>
+                  <img src="/eletric_logo.png" alt="Electrochemical Biosensor" className="w-10 h-10 object-contain" />
                 </div>
                 <span className="px-3 py-1 rounded-full text-[10px] font-bold tracking-wider text-teal-400 bg-teal-400/10 uppercase">
                   UPCOMING
