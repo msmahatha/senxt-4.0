@@ -29,7 +29,7 @@ const RING_COLORS = [
 ];
 
 const RING_RADII = Array.from({ length: 18 }, (_, index) => 380 + index * 35);
-const emptySubscribe = () => () => {};
+const emptySubscribe = () => () => { };
 
 function seededUnit(seed: number) {
   const value = Math.sin(seed * 12.9898 + 78.233) * 43758.5453123;
@@ -338,7 +338,7 @@ export function HeroSection() {
         </div>
 
         <h1 className="mb-6 text-[42px] font-bold leading-[1.05] tracking-[-0.03em] text-white md:text-[68px]">
-         Precision Diagnostics
+          Precision Diagnostics
           <br />
           at the Quantum Scale
           <span className="text-[#d5a64a] drop-shadow-[0_0_12px_rgba(213,166,74,0.75)]">.</span>
@@ -348,7 +348,7 @@ export function HeroSection() {
           Advancing next-generation sensor fabrication and AI for ultra-early disease detection.
         </p>
 
-        
+
       </div>
 
       {/* Soft seam into the zoom sequence below */}
