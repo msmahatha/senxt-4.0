@@ -156,16 +156,7 @@ export function AboutSection({ minimal = false }: { minimal?: boolean }) {
             transition={{ duration: 0.8 }}
             className="w-full lg:w-1/2 flex flex-col"
           >
-            <div className="inline-block px-4 py-1.5 mb-6 rounded-full border border-[#d4af37]/30 bg-[#d4af37]/10 text-[#d4af37] text-xs font-bold tracking-widest uppercase shadow-[0_0_10px_rgba(212,175,55,0.2)]">
-              DPIIT Approved Startup
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-6 leading-tight">
-              Sense-XT Innovations
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#1dd3b0] to-blue-500 glow-cyan">Private Limited</span>
-            </h2>
-            <p className="text-neutral-300 font-light leading-relaxed text-lg mb-8">
-              We build next-generation solutions at the intersection of Quantum Technology, Nanotechnology, and Artificial Intelligence. Our work translates advanced scientific research into real-world sensing and diagnostic technologies aligned with India&apos;s National Quantum Mission.
-            </p>
+
 
             <div className="mt-6 rounded-[1.5rem] border border-[#21d5bf]/20 bg-gradient-to-br from-[#21d5bf]/6 via-white/[0.02] to-[#d5a64a]/10 p-5 md:p-6">
               <p className="text-sm md:text-base font-bold uppercase tracking-[0.22em] text-[#d5a64a]">Collaboration</p>
