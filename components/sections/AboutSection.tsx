@@ -149,47 +149,7 @@ export function AboutSection({ minimal = false }: { minimal?: boolean }) {
       <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full z-10 flex flex-col gap-16">
         <div className="w-full flex flex-col lg:flex-row gap-16 items-start lg:items-stretch">
 
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="w-full lg:w-1/2 flex flex-col"
-          >
-
-
-            <div className="mt-6 rounded-[1.5rem] border border-[#21d5bf]/20 bg-gradient-to-br from-[#21d5bf]/6 via-white/[0.02] to-[#d5a64a]/10 p-5 md:p-6">
-              <p className="text-sm md:text-base font-bold uppercase tracking-[0.22em] text-[#d5a64a]">Collaboration</p>
-              <div className="relative mt-4 overflow-hidden rounded-2xl border border-white/10 bg-[#050505]/70">
-                <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 md:w-28 bg-gradient-to-r from-[#050505] to-transparent" />
-                <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 md:w-28 bg-gradient-to-l from-[#050505] to-transparent" />
-
-                <div className="institution-marquee flex w-max gap-6 px-5 py-5 md:gap-8 md:px-7 md:py-7">
-                  {INSTITUTE_SLIDES.map((institute, index) => (
-                    <article
-                      key={`${institute.id}-${index}`}
-                      className="flex min-w-[280px] items-center gap-4 rounded-2xl border border-white/10 bg-[#020202]/90 px-4 py-3 md:min-w-[340px] md:gap-5 md:px-6 md:py-4 shrink-0"
-                    >
-                      <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-lg border border-white/10 bg-white md:h-20 md:w-20">
-                        <Image
-                          src={institute.logo}
-                          alt={`${institute.name} logo`}
-                          fill
-                          sizes="80px"
-                          className="object-contain p-1.5"
-                        />
-                      </div>
-                      <p className="text-lg font-semibold text-neutral-100 leading-tight md:text-xl">{institute.name}</p>
-                    </article>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-
-          </motion.div>
-
-          <div className="lg:w-1/2 flex flex-col gap-6 w-full">
+          <div className="w-full flex flex-col gap-6">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
