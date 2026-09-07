@@ -19,7 +19,7 @@ export default function AboutPage() {
         </p>
       </div>
       
-      <div className="mt-[-150px]">
+      <div className="mt-8">
         <AboutSection />
       </div>
     </div>
