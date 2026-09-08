@@ -26,13 +26,6 @@ const WHAT_WE_DO = [
   },
 ];
 
-const MISSION_POINTS = [
-  "Develop quantum and nano-enabled biosensors.",
-  "Bridge research with real-world applications.",
-  "Contribute to India&apos;s deep-tech ecosystem.",
-  "Enable next-generation diagnostics.",
-];
-
 const LEADERSHIP = [
   {
     name: "Manas Thakur",
@@ -243,7 +236,7 @@ export function AboutSection({ minimal = false }: { minimal?: boolean }) {
                 </div>
                 <h3 className="text-2xl font-semibold text-white mb-4 tracking-wide group-hover:text-[#1dd3b0] transition-colors">Our Vision</h3>
                 <p className="text-neutral-400 font-light leading-relaxed text-base group-hover:text-neutral-300 transition-colors">
-                  To pioneer quantum-powered healthcare by developing globally competitive quantum sensing, nanotechnology, and AI-driven solutions from India that enable early disease detection, advance the National Quantum Mission, and strengthen India's leadership in deep-tech innovation under the vision of Make in India, Atmanirbhar Bharat, and Viksit Bharat.
+                  To pioneer quantum-powered healthcare by developing globally competitive quantum sensing, nanotechnology, and AI-driven solutions from India that enable early disease detection, advance the National Quantum Mission, and strengthen India&apos;s leadership in deep-tech innovation under the vision of Make in India, Atmanirbhar Bharat, and Viksit Bharat.
                 </p>
               </div>
 

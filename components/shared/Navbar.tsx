@@ -14,13 +14,12 @@ export function Navbar() {
   };
 
   useEffect(() => {
+    let frameId = 0;
     const handleScroll = () => {
+      if (frameId) return;
+      frameId = window.requestAnimationFrame(() => {
       // Trigger glassmorphism after scrolling past 50px from the hero section
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 50);
       
       // Calculate scroll progress percentage
       const totalScroll = document.documentElement.scrollTop;
@@ -28,13 +27,18 @@ export function Navbar() {
       if (windowHeight > 0) {
         setScrollProgress((totalScroll / windowHeight) * 100);
       }
+      frameId = 0;
+      });
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     // Run once on mount to check initial scroll position
     handleScroll();
     
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (frameId) window.cancelAnimationFrame(frameId);
+    };
   }, []);
 
   return (

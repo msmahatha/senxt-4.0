@@ -42,7 +42,30 @@ body {
   color: var(--foreground);
   overflow-x: hidden;
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
-  cursor: none; /* We'll use a custom cursor */
+}
+
+@media (pointer: fine) {
+  body { cursor: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@keyframes reveal-card {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal-card {
+  animation: reveal-card 600ms ease-out both;
+  animation-delay: calc(var(--reveal-index, 0) * 80ms);
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -64,6 +87,44 @@ body {
   box-shadow: none;
   text-shadow: 0 0 10px rgba(197, 146, 62, 0.42);
 }
+
+.career-input {
+  width: 100%;
+  border: 1px solid transparent;
+  border-radius: 1rem;
+  background: #020718;
+  padding: 1rem 1.25rem;
+  color: #f5f7fb;
+  outline: none;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.career-input::placeholder {
+  color: #707b92;
+}
+
+.career-input:focus {
+  border-color: rgba(22, 143, 133, 0.75);
+  box-shadow: 0 0 0 3px rgba(22, 143, 133, 0.13);
+}
+
+.admin-primary, .admin-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.75rem;
+  padding: 0.7rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+.admin-primary { background: #168f85; color: white; }
+.admin-primary:hover { background: #1aa398; }
+.admin-primary:disabled { opacity: 0.55; }
+.admin-secondary { border: 1px solid rgba(255,255,255,0.12); color: #d5dae4; }
+.admin-secondary:hover { background: rgba(255,255,255,0.06); }
+.admin-subheading { margin-top: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.75rem; font-size: 1rem; font-weight: 700; }
+.admin-row { border-radius: 1rem; border: 1px solid rgba(255,255,255,0.08); background: rgba(2,7,24,0.45); padding: 1rem; }
 
 ::selection {
   background: rgba(33, 213, 191, 0.3);

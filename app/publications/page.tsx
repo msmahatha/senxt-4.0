@@ -1,11 +1,4 @@
-"use client";
-
-import { useRef, useEffect } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const PUBLICATIONS = [
   {
@@ -35,31 +28,9 @@ const PUBLICATIONS = [
 ];
 
 export default function PublicationsPage() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(".pub-card", 
-        { y: 50, opacity: 0 },
-        { 
-          y: 0, 
-          opacity: 1, 
-          stagger: 0.2, 
-          duration: 1, 
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 80%",
-          }
-        }
-      );
-    }, containerRef);
-    return () => ctx.revert();
-  }, []);
-
   return (
     <main className="min-h-screen bg-[#050505] text-white pt-32 pb-24 px-6 lg:px-8">
-      <div className="max-w-5xl mx-auto" ref={containerRef}>
+      <div className="max-w-5xl mx-auto">
         <div className="mb-16">
           <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-4">
             Our <span className="text-cyan-500">Publications</span>
@@ -71,7 +42,7 @@ export default function PublicationsPage() {
 
         <div className="flex flex-col gap-8">
           {PUBLICATIONS.map((pub, index) => (
-            <div key={index} className="pub-card group relative p-8 md:p-10 rounded-2xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-500 overflow-hidden">
+            <div key={pub.doi} className="reveal-card group relative p-8 md:p-10 rounded-2xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-500 overflow-hidden" style={{ "--reveal-index": index } as React.CSSProperties}>
               {/* Subtle hover gradient */}
               <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-cyan-500/5 to-purple-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
               

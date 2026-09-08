@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Atom, Layers } from "lucide-react";
+import Image from "next/image";
 
 const cards = [
   {
@@ -59,7 +60,7 @@ export function OverviewSection() {
               )}
               
               {card.image ? (
-                <img src={card.image} alt={card.title} className="w-12 h-12 rounded-lg object-cover mb-6 drop-shadow-[0_0_8px_rgba(33,213,191,0.75)]" />
+                <Image src={card.image} alt={card.title} width={48} height={48} className="w-12 h-12 rounded-lg object-cover mb-6 drop-shadow-[0_0_8px_rgba(33,213,191,0.75)]" />
               ) : card.icon ? (
                 <card.icon className="w-10 h-10 text-cyan-400 mb-6 group-hover:text-cyan-300 transition-colors duration-300 drop-shadow-[0_0_8px_rgba(33,213,191,0.75)]" />
               ) : null}

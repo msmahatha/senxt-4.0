@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 import { BLOGS } from "@/data/blogs";
 
@@ -34,12 +35,11 @@ export function RNDResourcesSection() {
               <p className="text-sm text-cyan-400 mt-1 uppercase tracking-widest font-mono">Intellectual Property</p>
             </div>
             <div className="space-y-6">
-              {PATENTS.map((patent, idx) => (
-                <article key={idx} className="p-6 rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] transition-all flex flex-col md:flex-row gap-8 items-start">
+              {PATENTS.map((patent) => (
+                <article key={patent.id} className="p-6 rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] transition-all flex flex-col md:flex-row gap-8 items-start">
                   {patent.image && (
                     <div className="w-full md:w-1/4 shrink-0 rounded-xl overflow-hidden bg-white/5 flex items-center justify-center border border-white/10 p-2 aspect-[3/4] max-w-[200px]">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={patent.image} alt={patent.title} className="w-full h-full object-contain rounded-lg" />
+                      <Image src={patent.image} alt={patent.title} width={184} height={245} sizes="(max-width: 768px) 184px, 25vw" className="w-full h-full object-contain rounded-lg" />
                     </div>
                   )}
                   <div className="flex-grow flex flex-col">
@@ -73,14 +73,11 @@ export function RNDResourcesSection() {
               <p className="text-sm text-cyan-400 mt-1 uppercase tracking-widest font-mono">Latest News</p>
             </div>
             <div className="space-y-6">
-              {BLOGS.map((blog, idx) => (
-                <Link href={`/rnd/blogs/${blog.slug}`} key={idx} className="group p-5 rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] hover:border-cyan-500/30 transition-all cursor-pointer flex gap-6 items-start">
+              {BLOGS.map((blog) => (
+                <Link href={`/rnd/blogs/${blog.slug}`} key={blog.slug} className="group p-5 rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] hover:border-cyan-500/30 transition-all cursor-pointer flex gap-6 items-start">
                   <div className="w-24 h-24 shrink-0 rounded-xl overflow-hidden relative bg-neutral-900 hidden sm:block">
                     <div className={`absolute inset-0 bg-gradient-to-br ${blog.gradient} opacity-80`} />
-                    <div 
-                      className="absolute inset-0 bg-contain bg-no-repeat bg-center group-hover:scale-110 transition-transform duration-500"
-                      style={{ backgroundImage: `url('/blogs/${blog.slug}.jpg')` }}
-                    />
+                    <Image src={`/blogs/${blog.slug}.jpg`} alt="" fill sizes="96px" className="object-contain transition-transform duration-500 group-hover:scale-110" />
                   </div>
                   <div className="flex-1">
                     <p className="text-xs text-neutral-500 mb-2 font-mono">{blog.date}</p>

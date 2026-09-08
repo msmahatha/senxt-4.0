@@ -122,6 +122,9 @@ export function Globe({
     let globe: ReturnType<typeof createGlobe> | null = null;
     let animationId = 0;
     let resizeObserver: ResizeObserver | null = null;
+    let visibilityObserver: IntersectionObserver | null = null;
+    let isVisible = true;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let phi = 0;
 
     const globeMarkers = markers.map((marker) => ({
@@ -137,6 +140,8 @@ export function Globe({
     }));
 
     const animate = () => {
+      animationId = window.requestAnimationFrame(animate);
+      if (!isVisible || document.hidden || reducedMotion.matches) return;
       if (!isPausedRef.current) {
         phi += speed;
 
@@ -169,7 +174,6 @@ export function Globe({
         arcs: globeArcs,
       });
 
-      animationId = window.requestAnimationFrame(animate);
     };
 
     const init = () => {
@@ -200,6 +204,10 @@ export function Globe({
       });
 
       animate();
+      visibilityObserver = new IntersectionObserver(([entry]) => {
+        isVisible = entry.isIntersecting;
+      });
+      visibilityObserver.observe(canvas);
       window.setTimeout(() => {
         canvas.style.opacity = "1";
       }, 0);
@@ -221,6 +229,7 @@ export function Globe({
     return () => {
       if (animationId) window.cancelAnimationFrame(animationId);
       resizeObserver?.disconnect();
+      visibilityObserver?.disconnect();
       globe?.destroy();
     };
   }, [

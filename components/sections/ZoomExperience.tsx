@@ -15,6 +15,7 @@ export function ZoomExperience() {
   const ringRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
         scrollTrigger: {

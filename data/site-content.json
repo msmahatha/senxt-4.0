@@ -1,0 +1,34 @@
+{
+  "hero": {
+    "eyebrow": "Technology",
+    "titleLineOne": "Precision Diagnostics",
+    "titleLineTwo": "at the Quantum Scale",
+    "description": "Advancing next-generation sensor fabrication and AI for ultra-early disease detection.",
+    "ctaLabel": "Collaborate with us",
+    "ctaHref": "/contact"
+  },
+  "contact": {
+    "eyebrow": "Get in touch",
+    "title": "We'd love to hear from you.",
+    "description": "Whether you have a question about our technology, pricing, or just want to connect — our team is ready to help.",
+    "channels": [
+      { "title": "General Enquiry", "description": "For general information and business queries.", "email": "info@sense-xt.com" },
+      { "title": "Careers", "description": "Send your portfolio and CV for future consideration.", "email": "careers@sense-xt.com" }
+    ],
+    "locations": [
+      { "title": "Headquarters", "address": "Ashram Para,\nJalpaiguri – 735101" },
+      { "title": "Operations", "address": "Jadavpur University,\nKolkata - 700032" }
+    ],
+    "hours": "Open Mon-Fri, 9:00 - 18:00"
+  },
+  "careers": {
+    "eyebrow": "Join the team",
+    "title": "Shape the future of quantum health.",
+    "jobs": [
+      { "code": "SXT-QS-01", "title": "Quantum Sensing Scientist", "type": "Full-time", "location": "Bangalore" },
+      { "code": "SXT-ML-04", "title": "Machine Learning Engineer (Health-tech)", "type": "Full-time", "location": "Remote/Hybrid" },
+      { "code": "SXT-BD-02", "title": "Business Development Manager", "type": "Full-time", "location": "Bangalore" },
+      { "code": "SXT-FE-09", "title": "Frontend Developer (React)", "type": "Contract", "location": "Remote" }
+    ]
+  }
+}

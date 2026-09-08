@@ -1,40 +1,12 @@
-"use client";
-
-import { useRef, useEffect } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
-
-gsap.registerPlugin(ScrollTrigger);
+import Image from "next/image";
 
 import { BLOGS } from "@/data/blogs";
 
 export default function BlogsPage() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(".blog-card", 
-        { y: 50, opacity: 0 },
-        { 
-          y: 0, 
-          opacity: 1, 
-          stagger: 0.2, 
-          duration: 1, 
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 80%",
-          }
-        }
-      );
-    }, containerRef);
-    return () => ctx.revert();
-  }, []);
-
   return (
     <main className="min-h-screen bg-[#050505] text-white pt-32 pb-24 px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto" ref={containerRef}>
+      <div className="max-w-7xl mx-auto">
         <div className="mb-16">
           <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-4">
             Insights & <span className="text-purple-500">Updates</span>
@@ -46,16 +18,13 @@ export default function BlogsPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {BLOGS.map((blog, index) => (
-            <Link href={`/rnd/blogs/${blog.slug}`} key={index} className="blog-card group cursor-none h-full flex flex-col">
+            <Link href={`/rnd/blogs/${blog.slug}`} key={blog.slug} className="reveal-card group cursor-none h-full flex flex-col" style={{ "--reveal-index": index } as React.CSSProperties}>
               <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden mb-6 bg-neutral-900">
                 {/* Fallback gradient */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${blog.gradient} opacity-80 group-hover:scale-110 transition-transform duration-700`} />
                 
                 {/* Actual image */}
-                <div 
-                  className="absolute inset-0 bg-contain bg-no-repeat bg-center group-hover:scale-110 transition-transform duration-700"
-                  style={{ backgroundImage: `url('/blogs/${blog.slug}.jpg')` }}
-                />
+                <Image src={`/blogs/${blog.slug}.jpg`} alt="" fill sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw" className="object-contain transition-transform duration-700 group-hover:scale-110" />
                 
                 <div className="absolute top-4 left-4">
                   <span className="bg-black/50 backdrop-blur-md border border-white/10 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">

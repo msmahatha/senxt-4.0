@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export function InnovationsSection() {
   return (
@@ -47,7 +48,7 @@ export function InnovationsSection() {
             <div className="relative z-10">
               <div className="flex items-start justify-between mb-8">
                 <div className="w-12 h-12 rounded-full border border-teal-500/30 flex items-center justify-center bg-teal-500/5 overflow-hidden">
-                  <img src="/quentam.png" alt="Quantum Biosensor" className="w-10 h-10 object-contain" />
+                  <Image src="/quentam.png" alt="Quantum Biosensor" width={40} height={40} className="w-10 h-10 object-contain" />
                 </div>
                 <span className="px-3 py-1 rounded-full text-[10px] font-bold tracking-wider text-teal-400 bg-teal-400/10 uppercase">
                   AVAILABLE
@@ -59,23 +60,7 @@ export function InnovationsSection() {
                 Next-gen quantum sensing platform for ultra-sensitive detection of infectious diseases.
               </p>
 
-              <div className="space-y-4">
-                <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-neutral-500">KEY SPECIFICATIONS</p>
-                <ul className="space-y-3">
-                  <li className="flex items-center gap-3 text-sm text-neutral-300">
-                    <span className="w-1 h-1 rounded-full bg-teal-400" />
-                    <span className="font-medium text-neutral-400">Sensitivity:</span> 0.1 attomolar
-                  </li>
-                  <li className="flex items-center gap-3 text-sm text-neutral-300">
-                    <span className="w-1 h-1 rounded-full bg-teal-400" />
-                    <span className="font-medium text-neutral-400">Response Time:</span> &lt; 2 mins
-                  </li>
-                  <li className="flex items-center gap-3 text-sm text-neutral-300">
-                    <span className="w-1 h-1 rounded-full bg-teal-400" />
-                    <span className="font-medium text-neutral-400">Power Consumption:</span> 50mW
-                  </li>
-                </ul>
-              </div>
+
             </div>
 
             <div className="mt-10 rounded-xl bg-black/40 border border-white/10 p-5 relative z-10 backdrop-blur-md">
@@ -101,7 +86,7 @@ export function InnovationsSection() {
             <div className="relative z-10">
               <div className="flex items-start justify-between mb-8">
                 <div className="w-12 h-12 rounded-full border border-teal-500/30 flex items-center justify-center bg-[#E5F5F6] overflow-hidden">
-                  <img src="/eletric_logo.png" alt="Electrochemical Biosensor" className="w-10 h-10 object-contain" />
+                  <Image src="/eletric_logo.png" alt="Electrochemical Biosensor" width={40} height={40} className="w-10 h-10 object-contain" />
                 </div>
                 <span className="px-3 py-1 rounded-full text-[10px] font-bold tracking-wider text-teal-400 bg-teal-400/10 uppercase">
                   UPCOMING
@@ -113,23 +98,7 @@ export function InnovationsSection() {
                 Ultra-sensitive viral biomarker detection using NV-center diamonds.
               </p>
 
-              <div className="space-y-4">
-                <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-neutral-500">KEY SPECIFICATIONS</p>
-                <ul className="space-y-3">
-                  <li className="flex items-center gap-3 text-sm text-neutral-300">
-                    <span className="w-1 h-1 rounded-full bg-teal-400" />
-                    <span className="font-medium text-neutral-400">Target:</span> Viral RNA/DNA
-                  </li>
-                  <li className="flex items-center gap-3 text-sm text-neutral-300">
-                    <span className="w-1 h-1 rounded-full bg-teal-400" />
-                    <span className="font-medium text-neutral-400">Platform:</span> Microfluidic chip
-                  </li>
-                  <li className="flex items-center gap-3 text-sm text-neutral-300">
-                    <span className="w-1 h-1 rounded-full bg-teal-400" />
-                    <span className="font-medium text-neutral-400">Precision:</span> &gt; 99.9%
-                  </li>
-                </ul>
-              </div>
+
             </div>
 
             <div className="mt-10 rounded-xl bg-black/40 border border-white/10 p-5 relative z-10 backdrop-blur-md">

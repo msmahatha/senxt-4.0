@@ -180,6 +180,9 @@ function SymbioticNetwork() {
     const mouse = { x: null as number | null, y: null as number | null, radius: 250 };
     const particlesArray: ParticleState[] = [];
     let animationFrameId = 0;
+    let lastFrameTime = 0;
+    let isVisible = true;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     const setCanvasSize = () => {
       canvas.width = window.innerWidth;
@@ -246,7 +249,7 @@ function SymbioticNetwork() {
     const initializeParticles = () => {
       particlesArray.length = 0;
 
-      const numberOfParticles = (canvas.height * canvas.width) / 11000;
+      const numberOfParticles = Math.min(window.innerWidth < 768 ? 70 : 140, (canvas.height * canvas.width) / 14000);
       for (let index = 0; index < numberOfParticles; index += 1) {
         const size = Math.random() * 2.5 + 0.5;
         const x = Math.random() * (canvas.width - size * 4) + size * 2;
@@ -261,29 +264,49 @@ function SymbioticNetwork() {
 
     const connectParticles = () => {
       const maxDistanceSquared = 18000;
-      for (let a = 0; a < particlesArray.length; a += 1) {
-        for (let b = a; b < particlesArray.length; b += 1) {
-          const dx = particlesArray[a].x - particlesArray[b].x;
-          const dy = particlesArray[a].y - particlesArray[b].y;
-          const distanceSquared = dx * dx + dy * dy;
+      const cellSize = Math.sqrt(maxDistanceSquared);
+      const grid = new Map<string, number[]>();
 
-          if (distanceSquared < maxDistanceSquared) {
-            const opacity = 1 - distanceSquared / maxDistanceSquared;
-            context.strokeStyle = particlesArray[a].color;
-            context.globalAlpha = opacity * 0.7;
-            context.lineWidth = 1.2;
-            context.beginPath();
-            context.moveTo(particlesArray[a].x, particlesArray[a].y);
-            context.lineTo(particlesArray[b].x, particlesArray[b].y);
-            context.stroke();
+      particlesArray.forEach((particle, index) => {
+        const key = `${Math.floor(particle.x / cellSize)},${Math.floor(particle.y / cellSize)}`;
+        const bucket = grid.get(key);
+        if (bucket) bucket.push(index);
+        else grid.set(key, [index]);
+      });
+
+      for (let a = 0; a < particlesArray.length; a += 1) {
+        const cellX = Math.floor(particlesArray[a].x / cellSize);
+        const cellY = Math.floor(particlesArray[a].y / cellSize);
+        for (let offsetX = -1; offsetX <= 1; offsetX += 1) {
+          for (let offsetY = -1; offsetY <= 1; offsetY += 1) {
+            const nearby = grid.get(`${cellX + offsetX},${cellY + offsetY}`) ?? [];
+            for (const b of nearby) {
+              if (b <= a) continue;
+              const dx = particlesArray[a].x - particlesArray[b].x;
+              const dy = particlesArray[a].y - particlesArray[b].y;
+              const distanceSquared = dx * dx + dy * dy;
+
+              if (distanceSquared < maxDistanceSquared) {
+                const opacity = 1 - distanceSquared / maxDistanceSquared;
+                context.strokeStyle = particlesArray[a].color;
+                context.globalAlpha = opacity * 0.7;
+                context.lineWidth = 1.2;
+                context.beginPath();
+                context.moveTo(particlesArray[a].x, particlesArray[a].y);
+                context.lineTo(particlesArray[b].x, particlesArray[b].y);
+                context.stroke();
+              }
+            }
           }
         }
       }
       context.globalAlpha = 1;
     };
 
-    const animate = () => {
+    const animate = (time = 0) => {
       animationFrameId = window.requestAnimationFrame(animate);
+      if (!isVisible || document.hidden || reducedMotion.matches || time - lastFrameTime < 1000 / 30) return;
+      lastFrameTime = time;
       context.clearRect(0, 0, canvas.width, canvas.height);
 
       for (let index = 0; index < particlesArray.length; index += 1) {
@@ -307,6 +330,11 @@ function SymbioticNetwork() {
     initializeParticles();
     animate();
 
+    const visibilityObserver = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+    });
+    visibilityObserver.observe(canvas);
+
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("resize", handleResize);
 
@@ -314,19 +342,29 @@ function SymbioticNetwork() {
       window.cancelAnimationFrame(animationFrameId);
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("resize", handleResize);
+      visibilityObserver.disconnect();
     };
   }, []);
 
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 z-0 pointer-events-auto opacity-80 mix-blend-screen"
+      className="pointer-events-none absolute inset-0 z-0 opacity-80 mix-blend-screen"
       aria-hidden="true"
     />
   );
 }
 
-export function HeroSection() {
+type HeroContent = {
+  eyebrow: string;
+  titleLineOne: string;
+  titleLineTwo: string;
+  description: string;
+  ctaLabel: string;
+  ctaHref: string;
+};
+
+export function HeroSection({ content }: { content: HeroContent }) {
   return (
     <section className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-[#030712] pt-28 pb-20">
       <DataRings />
@@ -334,21 +372,26 @@ export function HeroSection() {
 
       <div className="pointer-events-none relative z-10 mx-auto mt-8 max-w-4xl px-6 text-center">
         <div className="mb-8 inline-block rounded-sm border border-[#d5a64a]/35 bg-[#d5a64a]/10 px-3 py-1.5 text-[9px] font-bold tracking-[0.15em] text-[#e8c978] backdrop-blur-sm">
-          TECHNOLOGY
+          {content.eyebrow}
         </div>
 
         <h1 className="mb-6 text-[42px] font-bold leading-[1.05] tracking-[-0.03em] text-white md:text-[68px]">
-          Precision Diagnostics
+          {content.titleLineOne}
           <br />
-          at the Quantum Scale
+          {content.titleLineTwo}
           <span className="text-[#d5a64a] drop-shadow-[0_0_12px_rgba(213,166,74,0.75)]">.</span>
         </h1>
 
         <p className="mx-auto mb-14 max-w-[620px] text-[15px] leading-relaxed font-normal text-gray-300 md:text-[17px]">
-          Advancing next-generation sensor fabrication and AI for ultra-early disease detection.
+          {content.description}
         </p>
 
-
+        <a
+          href={content.ctaHref}
+          className="pointer-events-auto inline-flex items-center justify-center rounded-full border border-[#d5a64a]/70 bg-[#d5a64a] px-7 py-3 text-sm font-semibold text-[#030712] shadow-[0_0_24px_rgba(213,166,74,0.25)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#e8c978] hover:shadow-[0_0_32px_rgba(213,166,74,0.4)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e8c978] focus-visible:ring-offset-2 focus-visible:ring-offset-[#030712]"
+        >
+          {content.ctaLabel}
+        </a>
       </div>
 
       {/* Soft seam into the zoom sequence below */}

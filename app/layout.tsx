@@ -15,6 +15,7 @@ const geistMono = Geist_Mono({
 import { Navbar } from "@/components/shared/Navbar";
 import { CursorEffect } from "@/components/shared/CursorEffect";
 import { Footer } from "@/components/shared/Footer";
+import { MotionProvider } from "@/components/shared/MotionProvider";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://sense-xt.vercel.app"),
@@ -80,12 +81,12 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body suppressHydrationWarning className="min-h-full flex flex-col bg-[#050505] text-white selection:bg-cyan-500/30">
-        <Navbar />
-        <CursorEffect />
-        <main className="flex-grow">
-          {children}
-        </main>
-        <Footer />
+        <MotionProvider>
+          <Navbar />
+          <CursorEffect />
+          <div className="flex-grow">{children}</div>
+          <Footer />
+        </MotionProvider>
       </body>
     </html>
   );

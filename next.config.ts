@@ -12,7 +12,7 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ["lucide-react"],
   },
   headers: async () => {
-    const headers = [
+    return [
       {
         source: "/(.*)",
         headers: [
@@ -27,20 +27,6 @@ const nextConfig: NextConfig = {
       },
     ];
 
-    if (process.env.NODE_ENV === "production") {
-      headers.push({
-        // Avoid overriding Next.js dev cache behavior to prevent stale chunks.
-        source: "/_next/static/(.*)",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
-      });
-    }
-
-    return headers;
   },
 };
 
