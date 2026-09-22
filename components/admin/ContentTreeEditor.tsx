@@ -15,6 +15,7 @@ export function ContentTreeEditor({ value, template, onChange, media, name = "Co
 function TreeField({ value, template, onChange, media, name }: { value: Value; template: Value; onChange: (value: Value) => void; media: MediaFile[]; name: string }) {
   if (typeof value === "string") {
     if (name === "kind") return <label className="block"><span className="mb-2 block text-xs font-bold text-neutral-400">Block type</span><select className="career-input" value={value} onChange={(event) => onChange(event.target.value)}><option value="h2">Section heading</option><option value="p">Paragraph</option><option value="li">Bullet point</option></select></label>;
+    if (name === "status") return <label className="block"><span className="mb-2 block text-xs font-bold uppercase tracking-wider text-neutral-400">Status</span><select className="career-input" value={value} onChange={(event) => onChange(event.target.value)}><option value="Available">Available</option><option value="Upcoming">Upcoming</option></select></label>;
     const isImage = /^(image|logo|bgImage|background|socialImage)$/i.test(name);
     return <label className="block space-y-2"><span className="block text-xs font-bold uppercase tracking-wider text-neutral-400">{labelFor(name)}</span>
       {name === "doi" && <span className="block text-xs text-neutral-400">Enter a verified DOI (for example, 10.1234/example). Leave blank to hide the paper link.</span>}
