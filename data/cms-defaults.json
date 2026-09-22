@@ -152,14 +152,14 @@
       {
         "title": "Electrochemical Biosensors",
         "description": "Rapid, reliable electrochemical sensing platforms optimized for the early detection of infectious diseases, particularly Dengue and other mosquito-borne infections.",
-        "image": "",
-        "bgImage": ""
+        "image": "/eletric_logo.png",
+        "bgImage": "/eletronic.png"
       },
       {
         "title": "Quantum Biosensing",
         "description": "Leveraging fluorescence nanodiamonds for ultra-sensitive detection of extremely low viral biomarker concentrations, facilitating ultra-early stage diagnosis.",
-        "image": "",
-        "bgImage": ""
+        "image": "/quentam.png",
+        "bgImage": "/bg_qb.png"
       },
       {
         "title": "AI & Hardware Integration",
