@@ -3,10 +3,11 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import type { SiteContent } from "@/lib/site-content";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export function ZoomExperience() {
+export function ZoomExperience({ content }: { content: SiteContent["zoom"] }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const humanRef = useRef<HTMLDivElement>(null);
   const cellRef = useRef<HTMLDivElement>(null);
@@ -68,37 +69,37 @@ export function ZoomExperience() {
         {/* Content Layers */}
         <div ref={humanRef} className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 w-full pointer-events-none">
           <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-white drop-shadow-md">
-            CLINICAL<span className="text-cyan-500">.</span>
+            {content.clinicalTitle}<span className="text-cyan-500">.</span>
           </h2>
           <p className="mt-4 text-sm md:text-base text-neutral-400 font-light max-w-md tracking-wide">
-            Macro-level symptom analysis and traditional diagnostics.
+            {content.clinicalDescription}
           </p>
         </div>
 
         <div ref={cellRef} className="absolute inset-0 flex flex-col items-center justify-center text-center opacity-0 px-4 w-full pointer-events-none">
           <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-white drop-shadow-md">
-            PATHOGEN<span className="text-cyan-500">.</span>
+            {content.pathogenTitle}<span className="text-cyan-500">.</span>
           </h2>
           <p className="mt-4 text-sm md:text-base text-neutral-400 font-light max-w-md tracking-wide">
-            Cellular anomalies and pathogenic structures. The battleground of early infection.
+            {content.pathogenDescription}
           </p>
         </div>
 
         <div ref={moleculeRef} className="absolute inset-0 flex flex-col items-center justify-center text-center opacity-0 px-4 w-full pointer-events-none">
           <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-white drop-shadow-md">
-            BIOSENSOR<span className="text-purple-500">.</span>
+            {content.biosensorTitle}<span className="text-purple-500">.</span>
           </h2>
           <p className="mt-4 text-sm md:text-base text-neutral-400 font-light max-w-md tracking-wide">
-            Targeted biomolecular interactions. Sensing specific proteins and nucleic acids.
+            {content.biosensorDescription}
           </p>
         </div>
 
         <div ref={atomRef} className="absolute inset-0 flex flex-col items-center justify-center text-center opacity-0 px-4 w-full pointer-events-none">
           <h2 className="text-5xl md:text-8xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-cyan-400 to-blue-600 glow-cyan">
-            QUANTUM<span className="text-white">.</span>
+            {content.quantumTitle}<span className="text-white">.</span>
           </h2>
           <p className="mt-4 text-sm md:text-lg text-cyan-200/80 font-light max-w-lg tracking-wide drop-shadow-[0_0_10px_rgba(0,255,255,0.3)]">
-            Sub-atomic precision. Harnessing quantum effects for an ultra-sensitive limit of detection.
+            {content.quantumDescription}
           </p>
         </div>
       </div>

@@ -2,9 +2,10 @@
 
 import { FormEvent, useRef, useState } from "react";
 import { Send, Upload } from "lucide-react";
-import type { Job } from "@/lib/site-content";
+import type { SiteContent } from "@/lib/site-content";
 
-export function CareerContent({ eyebrow, title, jobs }: { eyebrow: string; title: string; jobs: Job[] }) {
+export function CareerContent({ content }: { content: SiteContent["careers"] }) {
+  const { eyebrow, title, jobs, form: labels } = content;
   const [selectedJob, setSelectedJob] = useState("");
   const [fileName, setFileName] = useState("");
   const [status, setStatus] = useState<{ type: "idle" | "submitting" | "success" | "error"; message?: string }>({ type: "idle" });
@@ -22,13 +23,13 @@ export function CareerContent({ eyebrow, title, jobs }: { eyebrow: string; title
     try {
       const response = await fetch("/api/careers", { method: "POST", body: new FormData(formElement) });
       const result = (await response.json()) as { error?: string };
-      if (!response.ok) throw new Error(result.error || "Application could not be delivered.");
+      if (!response.ok) throw new Error(result.error || labels.errorMessage);
       formElement.reset();
       setSelectedJob("");
       setFileName("");
-      setStatus({ type: "success", message: "Application submitted successfully. We’ll be in touch." });
+      setStatus({ type: "success", message: labels.successMessage });
     } catch (error) {
-      setStatus({ type: "error", message: error instanceof Error ? error.message : "Application could not be delivered." });
+      setStatus({ type: "error", message: error instanceof Error ? error.message : labels.errorMessage });
     }
   };
 
@@ -45,11 +46,12 @@ export function CareerContent({ eyebrow, title, jobs }: { eyebrow: string; title
         <div className="mt-20 grid items-start gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(460px,1fr)] lg:gap-20">
           <section aria-labelledby="open-positions-heading">
             <div className="mb-10 flex items-center gap-4">
-              <h2 id="open-positions-heading" className="text-2xl font-bold sm:text-3xl">Open Positions</h2>
+              <h2 id="open-positions-heading" className="text-2xl font-bold sm:text-3xl">{content.openPositionsLabel}</h2>
               <span className="rounded-full bg-[#071b2c] px-4 py-1.5 text-sm font-bold text-[#168f85]">{jobs.length}</span>
             </div>
 
             <div className="space-y-7">
+              {!jobs.length && <p className="text-[#97a6c0]">{content.emptyMessage}</p>}
               {jobs.map((job) => (
                 <button
                   key={job.code}
@@ -76,35 +78,35 @@ export function CareerContent({ eyebrow, title, jobs }: { eyebrow: string; title
             </div>
           </section>
 
-          <section ref={formRef} className="rounded-[2.5rem] border border-white/[0.07] bg-[#111a2f] p-7 sm:p-10 lg:sticky lg:top-28 lg:p-12">
-            <h2 className="mb-10 text-3xl font-bold">Apply for a position</h2>
+          {jobs.length > 0 && <section ref={formRef} className="rounded-[2.5rem] border border-white/[0.07] bg-[#111a2f] p-7 sm:p-10 lg:sticky lg:top-28 lg:p-12">
+            <h2 className="mb-10 text-3xl font-bold">{labels.heading}</h2>
             <form onSubmit={handleSubmit} className="space-y-7">
               <div className="grid gap-6 sm:grid-cols-2">
-                <Field label="Full Name"><input required name="name" placeholder="John Doe" className="career-input" /></Field>
-                <Field label="Email Address"><input required name="email" type="email" placeholder="john@example.com" className="career-input" /></Field>
+                <Field label={labels.nameLabel}><input required name="name" placeholder={labels.namePlaceholder} className="career-input" /></Field>
+                <Field label={labels.emailLabel}><input required name="email" type="email" placeholder={labels.emailPlaceholder} className="career-input" /></Field>
               </div>
-              <Field label="Contact Number"><input required name="phone" type="tel" placeholder="+91 98765 43210" className="career-input" /></Field>
-              <Field label="Job Code">
+              <Field label={labels.phoneLabel}><input required name="phone" type="tel" placeholder={labels.phonePlaceholder} className="career-input" /></Field>
+              <Field label={labels.jobLabel}>
                 <select required name="job" value={selectedJob} onChange={(event) => setSelectedJob(event.target.value)} className="career-input appearance-none">
-                  <option value="" disabled>Select a job...</option>
+                  <option value="" disabled>{labels.jobPlaceholder}</option>
                   {jobs.map((job) => <option key={job.code} value={job.code}>{job.code} — {job.title}</option>)}
                 </select>
               </Field>
-              <Field label="CV / Resume Upload">
+              <Field label={labels.resumeLabel}>
                 <label className="flex min-h-40 cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed border-white/10 px-5 text-center text-[#97a6c0] transition-colors hover:border-[#168f85]/50 hover:text-white">
                   <Upload className="mb-4 size-9" strokeWidth={1.7} />
-                  <span>{fileName || "Click or drag your CV to upload (PDF, DOCX)"}</span>
+                  <span>{fileName || labels.resumeHint}</span>
                   <input required name="resume" type="file" accept=".pdf,.doc,.docx" className="sr-only" onChange={(event) => setFileName(event.target.files?.[0]?.name ?? "")} />
                 </label>
               </Field>
               <button disabled={status.type === "submitting"} type="submit" className="w-full rounded-2xl bg-[#168f85] px-6 py-4 text-lg font-bold text-white transition-all hover:bg-[#1aa398] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#43e4cf] focus-visible:ring-offset-2 focus-visible:ring-offset-[#111a2f] disabled:cursor-not-allowed disabled:opacity-60">
-                {status.type === "submitting" ? "Submitting…" : "Submit Application"}
+                {status.type === "submitting" ? labels.submittingLabel : labels.submitLabel}
               </button>
               {status.type !== "idle" && status.type !== "submitting" && (
                 <p role="status" className={`text-center text-sm ${status.type === "success" ? "text-[#7befde]" : "text-red-300"}`}>{status.message}</p>
               )}
             </form>
-          </section>
+          </section>}
         </div>
       </div>
     </div>

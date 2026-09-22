@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
+import { getSiteContent } from "@/lib/site-content";
 
-export const metadata: Metadata = {
-  title: "Insights & Updates",
-  description:
-    "Thoughts and engineering insights from the Sense-XT team on biosensors, graphene, AI diagnostics, and the bleeding edge of deep-tech healthcare.",
-};
+export async function generateMetadata(): Promise<Metadata> { const { headers } = await getSiteContent(); return { title: headers.rndblogs.title, description: headers.rndblogs.description }; }
 
 export default function BlogsLayout({ children }: { children: React.ReactNode }) {
   return <>{children}</>;

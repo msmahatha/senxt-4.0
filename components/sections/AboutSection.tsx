@@ -2,141 +2,12 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import type { SiteContent } from "@/lib/site-content";
 
-const WHAT_WE_DO = [
-  {
-    title: "Next-Generation Biosensors",
-    description: "Graphene and other 2D nanomaterial-based biosensor systems for high-performance diagnostic use cases.",
-  },
-  {
-    title: "Electrochemical Sensing",
-    description: "Electrochemical sensing platforms designed for ultra-sensitive and reliable detection workflows.",
-  },
-  {
-    title: "Quantum Biosensing",
-    description: "Fluorescent nanodiamonds and quantum defects for precision biosensing at extremely low biomarker concentrations.",
-  },
-  {
-    title: "Disease Detection",
-    description: "Detection pipelines for viral diseases and neurodegenerative biomarkers through advanced sensor architectures.",
-  },
-  {
-    title: "AI-Integrated Diagnostics",
-    description: "Smart diagnostics with AI-assisted real-time analysis to accelerate insight generation and decision support.",
-  },
-];
-
-const LEADERSHIP = [
-  {
-    name: "Manas Thakur",
-    role: "Co-Founder & CEO, Director",
-    company: "Sense-XT Innovations Pvt. Ltd.",
-    image: "/manas-thakur.jpg",
-    education: [
-      "Ph.D. Scholar | Jadavpur University",
-      "M.Tech, Gold Medalist",
-      "Visiting Scholar | University of Waterloo"
-    ],
-    researchInterests: "Electrochemical Biosensors • Microfluidics • Quantum Material • 2D Materials • Quantum Sensing • Nanotechnology • Microelectronics & Simulation",
-    linkedin: "https://www.linkedin.com/in/manasthakur06/"
-  },
-  {
-    name: "Sk. Najes Riaz",
-    role: "Co-Founder & CTO, Director",
-    company: "Sense-XT Innovations Pvt. Ltd.",
-    image: "/sk-najes-riaz.jpg",
-    education: [
-      "Ph.D. Scholar | Jadavpur University"
-    ],
-    researchInterests: "Quantum Materials • 2D Materials • Quantum Circuit • Quantum Sensing • Nanotechnology • Signal processing • Optical Engineering",
-    linkedin: "https://www.linkedin.com/in/najes-riaz/"
-  },
-  {
-    name: "Prof. Sourav Sarkar",
-    role: "Co-founder & Mentor",
-    company: "Sense-XT Innovations Pvt. Ltd.",
-    image: "/Sourav sarkar .png",
-    education: [
-      "Director & Professor at School of Materials Science & Nanotechnology, Jadavpur University"
-    ],
-    researchInterests: "Electrochemical Biosensors • Quantum Materials • 2D Materials • Quantum Sensing • Nanotechnology",
-    linkedin: "https://www.linkedin.com/in/sourav-sarkar-00445b69/"
-  },
-  {
-    name: "Sarwar Akhtar",
-    role: "Research Engineer",
-    company: "Sense-XT Innovations Pvt. Ltd.",
-    image: "/sarwar-akhtar.jpg",
-    education: [
-      "M.tech at School of Materials Science & Nanotechnology, Jadavpur University"
-    ],
-    researchInterests: "Electrochemical Biosensors • 2D Materials • Nanotechnology",
-    linkedin: "https://www.linkedin.com/in/sarwar-akhtar-3901a0148/"
-  },
-  {
-    name: "Arnab Kumar Saha",
-    role: "Research Engineer",
-    company: "Sense-XT Innovations Pvt. Ltd.",
-    image: "/arnab-kumar-saha.jpg",
-    education: [
-      "M.tech at School of Materials Science & Nanotechnology, Jadavpur University"
-    ],
-    researchInterests: "Electrochemical Biosensors • 2D Materials • Optical Sensor • Nanotechnology",
-    linkedin: "https://www.linkedin.com/in/arnab-saha-1b487214b/"
-  }
-];
-
-const INSTITUTES = [
-  {
-    id: "blackspektro",
-    name: "Blackspektro Solutions Pvt Ltd",
-    logo: "/institutes/blackspektro.png",
-  },
-  {
-    id: "nqm",
-    name: "National Quantum Mission",
-    logo: "/brand_logo/national.png",
-  },
-  {
-    id: "dst",
-    name: "Department of Science & Technology (DST)",
-    logo: "/brand_logo/DST.png",
-  },
-  {
-    id: "dpiit",
-    name: "DPIIT, Govt. of India",
-    logo: "/brand_logo/DPIIT.png",
-  },
-  {
-    id: "meity",
-    name: "Ministry of Electronics & IT (MeitY)",
-    logo: "/brand_logo/MEIT.png",
-  },
-  {
-    id: "iitb",
-    name: "IIT Bombay",
-    logo: "/brand_logo/IITB.png",
-  },
-  {
-    id: "ju",
-    name: "Jadavpur University",
-    logo: "/brand_logo/JU.png",
-  },
-  {
-    id: "iimc",
-    name: "IIM Calcutta Innovation Park",
-    logo: "/brand_logo/IIMC.png",
-  },
-  {
-    id: "qmet",
-    name: "Qmet Tech",
-    logo: "/brand_logo/qmet.png",
-  },
-];
-
-const INSTITUTE_SLIDES = [...INSTITUTES, ...INSTITUTES];
-
-export function AboutSection({ minimal = false }: { minimal?: boolean }) {
+export function AboutSection({ minimal = false, content }: { minimal?: boolean; content: SiteContent["about"] }) {
+  const WHAT_WE_DO = content.whatWeDo;
+  const LEADERSHIP = content.team;
+  const INSTITUTE_SLIDES = [...content.partners, ...content.partners];
   return (
     <section id="about" className="relative py-24 w-full bg-[#050505] border-t border-white/5">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full z-10 flex flex-col gap-16">
@@ -151,18 +22,18 @@ export function AboutSection({ minimal = false }: { minimal?: boolean }) {
               className="w-full lg:w-1/2 flex flex-col"
             >
               <div className="inline-block px-4 py-1.5 mb-6 rounded-full border border-[#d4af37]/30 bg-[#d4af37]/10 text-[#d4af37] text-xs font-bold tracking-widest uppercase shadow-[0_0_10px_rgba(212,175,55,0.2)]">
-                DPIIT Approved Startup
+                {content.badge}
               </div>
               <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-6 leading-tight">
-                Sense-XT Innovations
-                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#1dd3b0] to-blue-500 glow-cyan">Private Limited</span>
+                {content.title}
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#1dd3b0] to-blue-500 glow-cyan">{content.subtitle}</span>
               </h2>
-              <p className="text-neutral-300 font-light leading-relaxed text-lg mb-8">
-                We build next-generation solutions at the intersection of Quantum Technology, Nanotechnology, and Artificial Intelligence. Our work translates advanced scientific research into real-world sensing and diagnostic technologies aligned with India&apos;s National Quantum Mission.
+              <p className="body-copy text-neutral-300 font-light text-base md:text-lg mb-8">
+                {content.description}
               </p>
 
               <div className="mt-6 rounded-[1.5rem] border border-[#21d5bf]/20 bg-gradient-to-br from-[#21d5bf]/6 via-white/[0.02] to-[#d5a64a]/10 p-5 md:p-6">
-                <p className="text-sm md:text-base font-bold uppercase tracking-[0.22em] text-[#d5a64a]">Collaboration</p>
+                <p className="text-sm md:text-base font-bold uppercase tracking-[0.22em] text-[#d5a64a]">{content.partnersTitle}</p>
                 <div className="relative mt-4 overflow-hidden rounded-2xl border border-white/10 bg-[#050505]/70">
                   <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 md:w-28 bg-gradient-to-r from-[#050505] to-transparent" />
                   <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 md:w-28 bg-gradient-to-l from-[#050505] to-transparent" />
@@ -199,12 +70,12 @@ export function AboutSection({ minimal = false }: { minimal?: boolean }) {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="p-8 border border-white/10 bg-white/[0.02] rounded-3xl hover:bg-white/[0.04] transition-colors"
             >
-              <h3 className="text-xl font-semibold text-white mb-4">What We Do</h3>
+              <h3 className="text-xl font-semibold text-white mb-4">{content.whatWeDoTitle}</h3>
               <div className="space-y-4">
                 {WHAT_WE_DO.map((item) => (
                   <div key={item.title} className="rounded-xl border border-white/10 bg-[#050505]/40 p-4">
                     <h4 className="text-sm font-semibold uppercase tracking-wider text-[#d5a64a] mb-2">{item.title}</h4>
-                    <p className="text-neutral-400 font-light leading-relaxed text-sm">{item.description}</p>
+                    <p className="body-copy text-neutral-400 font-light text-sm">{item.description}</p>
                   </div>
                 ))}
               </div>
@@ -234,9 +105,9 @@ export function AboutSection({ minimal = false }: { minimal?: boolean }) {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                   </svg>
                 </div>
-                <h3 className="text-2xl font-semibold text-white mb-4 tracking-wide group-hover:text-[#1dd3b0] transition-colors">Our Vision</h3>
-                <p className="text-neutral-400 font-light leading-relaxed text-base group-hover:text-neutral-300 transition-colors">
-                  To pioneer quantum-powered healthcare by developing globally competitive quantum sensing, nanotechnology, and AI-driven solutions from India that enable early disease detection, advance the National Quantum Mission, and strengthen India&apos;s leadership in deep-tech innovation under the vision of Make in India, Atmanirbhar Bharat, and Viksit Bharat.
+                <h3 className="text-2xl font-semibold text-white mb-4 tracking-wide group-hover:text-[#1dd3b0] transition-colors">{content.visionTitle}</h3>
+                <p className="body-copy text-neutral-400 font-light text-base group-hover:text-neutral-300 transition-colors">
+                  {content.vision}
                 </p>
               </div>
 
@@ -247,9 +118,9 @@ export function AboutSection({ minimal = false }: { minimal?: boolean }) {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                 </div>
-                <h3 className="text-2xl font-semibold text-white mb-4 tracking-wide group-hover:text-[#d5a64a] transition-colors">Our Mission</h3>
-                <p className="text-neutral-400 font-light leading-relaxed text-base group-hover:text-neutral-300 transition-colors">
-                  We translate cutting-edge quantum, nanotechnology, and AI research into reliable, rapid, and accessible diagnostic solutions that advance technology driven preventive healthcare for all.
+                <h3 className="text-2xl font-semibold text-white mb-4 tracking-wide group-hover:text-[#d5a64a] transition-colors">{content.missionTitle}</h3>
+                <p className="body-copy text-neutral-400 font-light text-base group-hover:text-neutral-300 transition-colors">
+                  {content.mission}
                 </p>
               </div>
             </div>
@@ -266,11 +137,11 @@ export function AboutSection({ minimal = false }: { minimal?: boolean }) {
           >
             <div className="mb-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
               <div>
-                <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#d5a64a]">Leadership</p>
-                <h3 className="mt-2 text-2xl md:text-3xl font-semibold text-white">Founding Team</h3>
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#d5a64a]">{content.teamEyebrow}</p>
+                <h3 className="mt-2 text-2xl md:text-3xl font-semibold text-white">{content.teamTitle}</h3>
               </div>
               <p className="max-w-xl text-sm text-neutral-400 font-light">
-                Leadership driving our deep-tech roadmap across quantum biosensing, nanotechnology, and AI-integrated diagnostics.
+                {content.teamDescription}
               </p>
             </div>
 
@@ -324,7 +195,7 @@ export function AboutSection({ minimal = false }: { minimal?: boolean }) {
 
                   {leader.researchInterests && (
                     <div className="mt-5 pt-4 border-t border-white/10 mt-auto">
-                      <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#1dd3b0] mb-2">Research Interests</p>
+                      <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#1dd3b0] mb-2">{content.researchInterestsLabel}</p>
                       <p className="text-xs text-neutral-400 font-light leading-relaxed">{leader.researchInterests}</p>
                     </div>
                   )}
@@ -333,9 +204,9 @@ export function AboutSection({ minimal = false }: { minimal?: boolean }) {
             </div>
 
             <div className="mt-8 rounded-2xl border border-white/10 bg-white/[0.02] p-6 md:p-7">
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#d5a64a]">Commitment</p>
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#d5a64a]">{content.commitmentTitle}</p>
               <p className="mt-3 text-sm md:text-base text-neutral-300 font-light leading-relaxed">
-                We are committed to building technologies that create real impact in healthcare and advanced sensing, contributing to a technologically empowered India.
+                {content.commitment}
               </p>
             </div>
           </motion.div>

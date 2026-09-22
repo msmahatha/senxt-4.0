@@ -1,4 +1,5 @@
-import { BLOGS } from "@/data/blogs";
+import { getSiteContent } from "@/lib/site-content";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Metadata } from "next";
@@ -9,7 +10,8 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const blog = BLOGS.find((b) => b.slug === slug);
+  const { blogs } = await getSiteContent();
+  const blog = blogs.find((b) => b.slug === slug);
   
   if (!blog) {
     return {
@@ -18,20 +20,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   return {
-    title: `${blog.title} | Sense-XT Innovations`,
+    title: blog.title,
     description: blog.excerpt,
   };
 }
 
-export async function generateStaticParams() {
-  return BLOGS.map((blog) => ({
-    slug: blog.slug,
-  }));
-}
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
-  const blog = BLOGS.find((b) => b.slug === slug);
+  const { blogs, rnd } = await getSiteContent();
+  const blog = blogs.find((b) => b.slug === slug);
 
   if (!blog) {
     notFound();
@@ -47,7 +45,7 @@ export default async function BlogPostPage({ params }: Props) {
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
-          Back to all blogs
+          {rnd.backToBlogsLabel}
         </Link>
         
         <header className="mb-12">
@@ -64,17 +62,7 @@ export default async function BlogPostPage({ params }: Props) {
           </h1>
 
           <div className="w-full aspect-[21/9] md:aspect-[2.5/1] bg-white/5 rounded-3xl border border-white/10 overflow-hidden mb-12 relative flex items-center justify-center">
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-neutral-500 text-sm">
-              <svg className="w-12 h-12 mb-3 opacity-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-              <span>Image placeholder</span>
-              <span className="font-mono text-xs mt-1 opacity-70">public/blogs/{blog.slug}.jpg</span>
-            </div>
-            <div 
-              className="absolute inset-0 z-10 bg-cover bg-center bg-no-repeat"
-              style={{ backgroundImage: `url('/blogs/${blog.slug}.jpg')` }}
-            />
+            {blog.image && <Image src={blog.image} alt={blog.title} fill sizes="(max-width: 768px) 100vw, 896px" className="object-contain" />}
           </div>
           
           <div className={`w-full h-px opacity-50 bg-gradient-to-r ${blog.gradient}`} />
@@ -82,7 +70,7 @@ export default async function BlogPostPage({ params }: Props) {
 
         <article className="prose prose-invert prose-lg max-w-none prose-p:text-neutral-300 prose-p:font-light prose-p:leading-relaxed prose-a:text-cyan-400">
           {blog.content.map((paragraph, index) => (
-            <p key={index} className="mb-6">{paragraph}</p>
+            <p key={index} className="body-copy mb-6">{paragraph}</p>
           ))}
         </article>
       </div>

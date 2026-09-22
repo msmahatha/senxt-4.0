@@ -22,6 +22,27 @@
     "hours": "Open Mon-Fri, 9:00 - 18:00"
   },
   "careers": {
+    "metaTitle": "Careers",
+    "metaDescription": "Join Sense-XT Innovations. Explore open positions in quantum metrology, AI biosensor engineering, and electrochemical systems analysis.",
+    "openPositionsLabel": "Open Positions",
+    "emptyMessage": "There are no open positions right now. Please check back soon.",
+    "form": {
+      "heading": "Apply for a position",
+      "nameLabel": "Full Name",
+      "namePlaceholder": "John Doe",
+      "emailLabel": "Email Address",
+      "emailPlaceholder": "john@example.com",
+      "phoneLabel": "Contact Number",
+      "phonePlaceholder": "+91 98765 43210",
+      "jobLabel": "Job Code",
+      "jobPlaceholder": "Select a job...",
+      "resumeLabel": "CV / Resume Upload",
+      "resumeHint": "Click to choose your CV (PDF, DOC, DOCX)",
+      "submitLabel": "Submit Application",
+      "submittingLabel": "Submitting…",
+      "successMessage": "Application submitted successfully. We’ll be in touch.",
+      "errorMessage": "Application could not be delivered. Please try again."
+    },
     "eyebrow": "Join the team",
     "title": "Shape the future of quantum health.",
     "jobs": [

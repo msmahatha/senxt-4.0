@@ -9,9 +9,9 @@ export default async function Home() {
   return (
     <>
       <HeroSection content={content.hero} />
-      <ZoomExperience />
-      <OverviewSection />
-      <AboutSection minimal />
+      <ZoomExperience content={content.zoom} />
+      <OverviewSection content={content.overview} />
+      <AboutSection minimal content={content.about} />
     </>
   );
 }

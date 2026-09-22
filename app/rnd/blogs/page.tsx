@@ -1,19 +1,17 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import { BLOGS } from "@/data/blogs";
+import { getSiteContent } from "@/lib/site-content";
 
-export default function BlogsPage() {
+export default async function BlogsPage() {
+  const content = await getSiteContent();
+  const BLOGS = content.blogs;
   return (
     <main className="min-h-screen bg-[#050505] text-white pt-32 pb-24 px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="mb-16">
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-4">
-            Insights & <span className="text-purple-500">Updates</span>
-          </h1>
-          <p className="text-neutral-400 text-lg md:text-xl max-w-2xl font-light">
-            Thoughts from our engineering and research teams on the bleeding edge of deep-tech and medical hardware.
-          </p>
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-4">{content.headers.rndblogs.title}</h1>
+          <p className="text-neutral-400 text-lg md:text-xl max-w-2xl font-light">{content.headers.rndblogs.description}</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -24,7 +22,7 @@ export default function BlogsPage() {
                 <div className={`absolute inset-0 bg-gradient-to-br ${blog.gradient} opacity-80 group-hover:scale-110 transition-transform duration-700`} />
                 
                 {/* Actual image */}
-                <Image src={`/blogs/${blog.slug}.jpg`} alt="" fill sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw" className="object-contain transition-transform duration-700 group-hover:scale-110" />
+                {blog.image && <Image src={blog.image} alt="" fill sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw" className="object-contain transition-transform duration-700 group-hover:scale-110" />}
                 
                 <div className="absolute top-4 left-4">
                   <span className="bg-black/50 backdrop-blur-md border border-white/10 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
@@ -49,7 +47,7 @@ export default function BlogsPage() {
                 </p>
                 
                 <div className="mt-auto pt-4 flex items-center gap-2 text-sm font-bold tracking-wider uppercase text-white group-hover:text-purple-400 transition-colors">
-                  Read Article
+                  {content.rnd.readArticleLabel}
                   <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                   </svg>

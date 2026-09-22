@@ -42,3 +42,7 @@ next-env.d.ts
 
 # temp
 .tmp-preview/
+
+# Candidate documents must stay private and out of source control.
+/storage/resumes/*
+!/storage/resumes/.gitkeep

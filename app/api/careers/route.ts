@@ -1,7 +1,8 @@
 import { saveApplication } from "@/lib/applications";
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, writeFile, unlink } from "node:fs/promises";
 import path from "node:path";
 import { randomUUID } from "node:crypto";
+import { getSiteContent } from "@/lib/site-content";
 
 const MAX_RESUME_BYTES = 5 * 1024 * 1024;
 const ACCEPTED_RESUME_TYPES = new Set([
@@ -39,14 +40,17 @@ export async function POST(request: Request) {
   }
 
   const webhookUrl = process.env.CAREERS_WEBHOOK_URL;
+  const { careers } = await getSiteContent();
+  if (!careers.jobs.some((position) => position.code === job)) return Response.json({ error: "Please choose an available position." }, { status: 400 });
+  let filePath: string | undefined;
 
   try {
-    const uploadDir = path.join(process.cwd(), "public", "uploads", "resumes");
+    const uploadDir = path.join(process.cwd(), "storage", "resumes");
     await mkdir(uploadDir, { recursive: true });
     
-    const ext = resume.name.split('.').pop() || 'pdf';
+    const ext = resume.type === "application/pdf" ? "pdf" : resume.type === "application/msword" ? "doc" : "docx";
     const filename = `${randomUUID()}.${ext}`;
-    const filePath = path.join(uploadDir, filename);
+    filePath = path.join(uploadDir, filename);
     
     const arrayBuffer = await resume.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
@@ -57,16 +61,19 @@ export async function POST(request: Request) {
       email: email as string,
       phone: phone as string,
       job: job as string,
-      resumeUrl: `/uploads/resumes/${filename}`
+      resumeUrl: `/api/admin/resumes/${filename}`
     });
 
     if (webhookUrl) {
-      const response = await fetch(webhookUrl, { method: "POST", body: form, cache: "no-store" });
-      if (!response.ok) console.error(`Application provider returned ${response.status}`);
+      try {
+        const response = await fetch(webhookUrl, { method: "POST", body: form, cache: "no-store", signal: AbortSignal.timeout(10000) });
+        if (!response.ok) console.error(`Application provider returned ${response.status}`);
+      } catch { console.error("Optional application notification failed"); }
     }
 
     return Response.json({ ok: true });
   } catch (error) {
+    if (filePath) await unlink(filePath).catch(() => undefined);
     console.error("Career application processing failed", error);
     return Response.json(
       { error: "We could not process your application. Please email careers@sense-xt.com." },

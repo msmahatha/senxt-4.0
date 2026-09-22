@@ -3,21 +3,13 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 
-import { BLOGS } from "@/data/blogs";
-
-const PATENTS = [
-  {
-    title: "Speedy Heat-Induced Vacuum Assisted Process to Synthesize Quantum Dots",
-    id: "Patent No. 592404",
-    status: "Granted",
-    image: "/patent.png",
-    description: "A patented, ultrafast vacuum-assisted thermal process for synthesizing graphene and carbon quantum dots (GQDs/CQDs) from sustainable carbon precursors. The technology enables scalable production of highly crystalline quantum dots (~3.2 nm average size) in under one minute through a simple, cost-effective, and environmentally friendly process. Its high yield, rapid synthesis, and industrial scalability make it ideal for applications in sensing, healthcare, energy, electronics, and advanced nanotechnology.",
-  }
-];
+import type { SiteContent } from "@/lib/site-content";
 
 import Link from "next/link";
 
-export function RNDResourcesSection() {
+export function RNDResourcesSection({ content, blogs }: { content: SiteContent["rnd"]; blogs: SiteContent["blogs"] }) {
+  const PATENTS = content.patents;
+  const BLOGS = blogs;
   return (
     <section className="relative py-24 w-full bg-[#050505] border-t border-white/5">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full z-10">
@@ -31,8 +23,8 @@ export function RNDResourcesSection() {
             transition={{ duration: 0.5 }}
           >
             <div className="mb-6 border-b border-white/10 pb-4">
-              <h3 className="text-2xl font-bold text-white tracking-wide">Patents</h3>
-              <p className="text-sm text-cyan-400 mt-1 uppercase tracking-widest font-mono">Intellectual Property</p>
+              <h3 className="text-2xl font-bold text-white tracking-wide">{content.patentsTitle}</h3>
+              <p className="text-sm text-cyan-400 mt-1 uppercase tracking-widest font-mono">{content.patentsEyebrow}</p>
             </div>
             <div className="space-y-6">
               {PATENTS.map((patent) => (
@@ -47,7 +39,7 @@ export function RNDResourcesSection() {
                       <h4 className="text-xl font-semibold text-white leading-snug mb-2">{patent.title}</h4>
                       <p className="text-sm text-cyan-400 font-mono mb-4">{patent.id}</p>
                       {patent.description && (
-                        <p className="text-sm text-neutral-400 font-light leading-relaxed mb-6">{patent.description}</p>
+                        <p className="body-copy text-sm text-neutral-400 font-light mb-6">{patent.description}</p>
                       )}
                     </div>
                     <div className="mt-2">
@@ -69,15 +61,15 @@ export function RNDResourcesSection() {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <div className="mb-6 border-b border-white/10 pb-4">
-              <h3 className="text-2xl font-bold text-white tracking-wide">Blogs</h3>
-              <p className="text-sm text-cyan-400 mt-1 uppercase tracking-widest font-mono">Latest News</p>
+              <h3 className="text-2xl font-bold text-white tracking-wide">{content.blogsTitle}</h3>
+              <p className="text-sm text-cyan-400 mt-1 uppercase tracking-widest font-mono">{content.blogsEyebrow}</p>
             </div>
             <div className="space-y-6">
               {BLOGS.map((blog) => (
                 <Link href={`/rnd/blogs/${blog.slug}`} key={blog.slug} className="group p-5 rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] hover:border-cyan-500/30 transition-all cursor-pointer flex gap-6 items-start">
                   <div className="w-24 h-24 shrink-0 rounded-xl overflow-hidden relative bg-neutral-900 hidden sm:block">
                     <div className={`absolute inset-0 bg-gradient-to-br ${blog.gradient} opacity-80`} />
-                    <Image src={`/blogs/${blog.slug}.jpg`} alt="" fill sizes="96px" className="object-contain transition-transform duration-500 group-hover:scale-110" />
+                    {blog.image && <Image src={blog.image} alt="" fill sizes="96px" className="object-contain transition-transform duration-500 group-hover:scale-110" />}
                   </div>
                   <div className="flex-1">
                     <p className="text-xs text-neutral-500 mb-2 font-mono">{blog.date}</p>

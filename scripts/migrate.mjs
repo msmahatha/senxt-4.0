@@ -4,7 +4,10 @@ import pg from "pg";
 if (!process.env.DATABASE_URL) throw new Error("DATABASE_URL is required");
 
 const sql = await readFile(new URL("../db/schema.sql", import.meta.url), "utf8");
-const initialContent = JSON.parse(await readFile(new URL("../data/site-content.json", import.meta.url), "utf8"));
+const initialContent = {
+  ...JSON.parse(await readFile(new URL("../data/cms-defaults.json", import.meta.url), "utf8")),
+  ...JSON.parse(await readFile(new URL("../data/site-content.json", import.meta.url), "utf8")),
+};
 const pool = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: process.env.DATABASE_SSL === "false" ? false : { rejectUnauthorized: false },
@@ -13,7 +16,7 @@ const pool = new pg.Pool({
 try {
   await pool.query(sql);
   await pool.query(
-    "INSERT INTO site_content (id, content) VALUES ($1, $2::jsonb) ON CONFLICT (id) DO NOTHING",
+    "INSERT INTO site_content (id, content) VALUES ($1, $2::jsonb) ON CONFLICT (id) DO UPDATE SET content = EXCLUDED.content || site_content.content",
     ["primary", JSON.stringify(initialContent)],
   );
   console.log("PostgreSQL migration complete.");

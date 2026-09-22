@@ -1,17 +1,25 @@
 import "server-only";
 
-import { mkdir, readdir, stat } from "node:fs/promises";
+import { readdir, stat } from "node:fs/promises";
 import path from "node:path";
 
 export type MediaFile = { name: string; url: string; size: number; uploadedAt: string };
 export const uploadDirectory = path.join(process.cwd(), "public", "uploads");
 
 export async function listMediaFiles(): Promise<MediaFile[]> {
-  await mkdir(uploadDirectory, { recursive: true });
-  const names = (await readdir(uploadDirectory)).filter((name) => name !== ".gitkeep");
-  const files = await Promise.all(names.map(async (name) => {
-    const details = await stat(path.join(uploadDirectory, name));
-    return { name, url: `/uploads/${name}`, size: details.size, uploadedAt: details.mtime.toISOString() };
-  }));
+  const publicDirectory = path.join(process.cwd(), "public");
+  const files: MediaFile[] = [];
+  async function scan(directory: string) {
+    for (const entry of await readdir(directory, { withFileTypes: true })) {
+      if (entry.name.startsWith(".") || entry.name === "resumes") continue;
+      const fullPath = path.join(directory, entry.name);
+      if (entry.isDirectory()) await scan(fullPath);
+      else if (entry.isFile() && /\.(jpe?g|png|webp|avif|gif|svg)$/i.test(entry.name)) {
+        const details = await stat(fullPath);
+        files.push({ name: entry.name, url: `/${path.relative(publicDirectory, fullPath).split(path.sep).join("/")}`, size: details.size, uploadedAt: details.mtime.toISOString() });
+      }
+    }
+  }
+  await scan(publicDirectory);
   return files.sort((a, b) => b.uploadedAt.localeCompare(a.uploadedAt));
 }

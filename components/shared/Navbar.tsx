@@ -3,8 +3,9 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import type { SiteContent } from "@/lib/site-content";
 
-export function Navbar() {
+export function Navbar({ settings }: { settings: SiteContent["settings"] }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -62,7 +63,7 @@ export function Navbar() {
           <Link href="/" className="flex items-center gap-3 group relative cursor-none z-50">
             <div className={`relative overflow-hidden group-hover:scale-105 transition-all duration-500 ${isScrolled ? 'w-[120px] sm:w-[150px]' : 'w-[140px] sm:w-[160px]'}`}>
               <Image
-                src="/logo.png"
+                src={settings.logo}
                 alt="Sense-XT Logo"
                 width={180}
                 height={54}
@@ -73,13 +74,8 @@ export function Navbar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex flex-wrap items-center gap-4 lg:gap-6 text-xs lg:text-sm font-medium tracking-widest uppercase text-white/70">
-            <Link href="/" className="hover:text-cyan-400 transition-colors cursor-none">Home</Link>
-            <Link href="/rnd" className="hover:text-cyan-400 transition-colors cursor-none">R&D</Link>
-            <Link href="/product" className="hover:text-cyan-400 transition-colors cursor-none">Product</Link>
-            <Link href="/about" className="hover:text-cyan-400 transition-colors cursor-none">About Us</Link>
-            <Link href="/career" className="hover:text-cyan-400 transition-colors cursor-none">Career</Link>
-            <Link href="/contact" className="border border-blue-500/70 bg-blue-500/10 px-4 py-2 flex items-center gap-2 rounded-full text-blue-400 hover:bg-blue-500/20 transition-colors cursor-none">Contact</Link>
+          <div className="hidden lg:flex flex-wrap items-center gap-6 text-sm font-medium tracking-widest uppercase text-white/70">
+            {settings.navigation.map((link, index) => <Link key={index} href={link.href} className="hover:text-cyan-400 transition-colors">{link.label}</Link>)}
           </div>
 
           {/* Mobile Menu Toggle Button */}
@@ -103,14 +99,7 @@ export function Navbar() {
           isMobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
       >
-        <div className="flex flex-col items-center gap-6 text-xl font-bold tracking-widest uppercase text-white/80">
-          <Link onClick={closeMobileMenu} href="/" className="hover:text-cyan-400 transition-colors cursor-none">Home</Link>
-          <Link onClick={closeMobileMenu} href="/rnd" className="hover:text-cyan-400 transition-colors cursor-none">R&D</Link>
-          <Link onClick={closeMobileMenu} href="/product" className="hover:text-cyan-400 transition-colors cursor-none">Product</Link>
-          <Link onClick={closeMobileMenu} href="/about" className="hover:text-cyan-400 transition-colors cursor-none">About Us</Link>
-          <Link onClick={closeMobileMenu} href="/career" className="hover:text-cyan-400 transition-colors cursor-none">Career</Link>
-          <Link onClick={closeMobileMenu} href="/contact" className="text-blue-400 border border-blue-500 px-8 py-3 rounded-full hover:bg-blue-500/10 transition-colors cursor-none">Contact</Link>
-        </div>
+        <div className="flex flex-col items-center gap-6 text-xl font-bold tracking-widest uppercase text-white/80">{settings.navigation.map((link, index) => <Link key={index} onClick={closeMobileMenu} href={link.href} className="hover:text-cyan-400 transition-colors">{link.label}</Link>)}</div>
       </div>
     </>
   );

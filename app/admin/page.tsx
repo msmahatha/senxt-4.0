@@ -12,5 +12,5 @@ export default async function AdminPage() {
   const authenticated = validAdminToken((await cookies()).get(ADMIN_COOKIE)?.value);
   const content = authenticated ? await getSiteContent() : null;
   const media = authenticated ? await listMediaFiles() : [];
-  return <AdminPanel configured={configured} initialAuthenticated={authenticated} initialContent={content} initialMedia={media} />;
+  return <AdminPanel configured={configured} notificationsConfigured={Boolean(process.env.CAREERS_WEBHOOK_URL)} initialAuthenticated={authenticated} initialContent={content} initialMedia={media} />;
 }

@@ -41,7 +41,27 @@ body {
   background: var(--background);
   color: var(--foreground);
   overflow-x: hidden;
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+/* Keep long-form copy in even, readable blocks without stretching short labels. */
+.body-copy {
+  text-align: left;
+  line-height: 1.75;
+  overflow-wrap: break-word;
+}
+
+@media (min-width: 640px) {
+  .body-copy {
+    text-align: justify;
+    text-justify: inter-word;
+    text-align-last: left;
+    hyphens: auto;
+  }
+}
+
+h1, h2, h3, h4 {
+  text-wrap: balance;
 }
 
 @media (pointer: fine) {
