@@ -16,7 +16,7 @@ export type SiteContent = typeof cmsDefaults & {
     locations: { title: string; address: string }[];
     hours: string;
   };
-  careers: typeof baseDefaults.careers;
+  careers: Omit<typeof baseDefaults.careers, "jobs"> & { jobs: Job[] };
 };
 
 export const defaultSiteContent: SiteContent = { ...cmsDefaults, ...baseDefaults };
