@@ -45,11 +45,6 @@
     },
     "eyebrow": "Join the team",
     "title": "Shape the future of quantum health.",
-    "jobs": [
-      { "code": "SXT-QS-01", "title": "Quantum Sensing Scientist", "type": "Full-time", "location": "Bangalore" },
-      { "code": "SXT-ML-04", "title": "Machine Learning Engineer (Health-tech)", "type": "Full-time", "location": "Remote/Hybrid" },
-      { "code": "SXT-BD-02", "title": "Business Development Manager", "type": "Full-time", "location": "Bangalore" },
-      { "code": "SXT-FE-09", "title": "Frontend Developer (React)", "type": "Contract", "location": "Remote" }
-    ]
+    "jobs": []
   }
 }
